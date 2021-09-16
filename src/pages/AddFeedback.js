@@ -25,15 +25,15 @@ const AddFeedback = () => {
     const name = e.target.name;
 
     if (!formData[name]) {
-      setErrorStatus({
-        ...errorStatus,
+      setErrorStatus((err) => ({
+        ...err,
         [name]: true,
-      });
+      }));
     } else {
-      setErrorStatus({
-        ...errorStatus,
+      setErrorStatus((err) => ({
+        ...err,
         [name]: false,
-      });
+      }));
     }
   };
 
@@ -56,13 +56,6 @@ const AddFeedback = () => {
         setErrorStatus((err) => ({ ...err, [key]: true }));
       }
     });
-    // if (!formData.title) {
-    //   setErrorStatus((err) => ({ ...err, title: true }));
-    // }
-
-    // if (!formData.category) {
-    //   setErrorStatus((err) => ({ ...err, category: true }));
-    // }
   };
 
   return (
