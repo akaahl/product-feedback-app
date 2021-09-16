@@ -87,6 +87,11 @@ const AddFeedback = () => {
     }
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    history.push("/");
+  };
+
   return (
     <StyledContainer>
       <nav>
@@ -158,7 +163,9 @@ const AddFeedback = () => {
           </small>
 
           <div className="feedback__submit-cancel-buttons">
-            <button className="feedback__cancel-btn">Cancel</button>
+            <button className="feedback__cancel-btn" onClick={handleCancel}>
+              Cancel
+            </button>
             <button
               type="submit"
               className="feedback__submit-btn"
