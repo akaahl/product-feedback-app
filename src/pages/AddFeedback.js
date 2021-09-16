@@ -184,7 +184,7 @@ export default AddFeedback;
 
 const StyledContainer = styled.div`
   margin: 70px 0;
-  width: 600px;
+  width: 800px;
 
   nav {
     button {
