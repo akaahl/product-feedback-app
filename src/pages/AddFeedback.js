@@ -5,9 +5,12 @@ import gradientBackground from "../assets/suggestions/desktop/background-header.
 import plusIcon from "../assets/shared/icon-plus.svg";
 import { useHistory } from "react-router";
 import SelectDropdown from "../components/AddFeedback/SelectDropdown";
+import { useDispatch } from "react-redux";
+import { updateData } from "../actions/dataActions";
 
 const AddFeedback = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [errorStatus, setErrorStatus] = useState({
     title: false,
@@ -56,6 +59,32 @@ const AddFeedback = () => {
         setErrorStatus((err) => ({ ...err, [key]: true }));
       }
     });
+
+    const formArr = Object.entries(formData);
+
+    const filledForm = formArr.every((data) => (data[1] !== "" ? true : false));
+
+    if (filledForm) {
+      const storage = JSON.parse(localStorage.getItem("data"));
+      const lastId =
+        storage.productRequests[storage.productRequests.length - 1].id;
+
+      const userFeedback = {
+        category: formData.category,
+        comments: [],
+        description: formData.details,
+        id: lastId + 1,
+        status: "suggestion",
+        title: formData.title,
+        upvoted: false,
+        upvotes: 0,
+      };
+
+      storage.productRequests.push(userFeedback);
+      localStorage.setItem("data", JSON.stringify(storage));
+      dispatch(updateData(storage));
+      history.push("/");
+    }
   };
 
   return (
