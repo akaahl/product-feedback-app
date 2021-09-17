@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
+import Feedback from "../components/Home/Main/Feedback";
 
-const Feedback = () => {
+const FeedbackDetails = () => {
   return (
     <StyledFeedback>
       <nav className="feedback__nav">
@@ -13,11 +14,20 @@ const Feedback = () => {
 
         <button className="feedback__nav-edit-btn">Edit Feedback</button>
       </nav>
+
+      <Feedback
+        upvotes={112}
+        title="Add tags for solutions"
+        id={1}
+        description="Easier to search for solutions based on a specific stack"
+        category="enhancement"
+        key={2}
+      />
     </StyledFeedback>
   );
 };
 
-export default Feedback;
+export default FeedbackDetails;
 
 const StyledFeedback = styled.main`
   margin: 70px 0;
@@ -27,6 +37,7 @@ const StyledFeedback = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 30px;
 
     .feedback__nav-back-btn {
       border: none;

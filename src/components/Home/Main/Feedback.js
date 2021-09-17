@@ -43,7 +43,7 @@ const FeedbackContainer = styled.section`
 
   button {
     border: 0;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #f2f4ff;
     display: flex;
     flex-direction: column;

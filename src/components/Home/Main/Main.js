@@ -8,7 +8,6 @@ import Feedback from "./Feedback";
 import { useSelector, useDispatch } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
-import { useOnclickOutside } from "../../../utils/utilityFunctions";
 
 const Main = () => {
   const [showOptions, setShowOptions] = useState(false);

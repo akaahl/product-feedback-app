@@ -4,7 +4,7 @@ import GlobalStyle from "./globalStyles";
 import Home from "./pages/Home";
 import Roadmap from "./pages/Roadmap";
 import AddFeedback from "./pages/AddFeedback";
-import Feedback from "./pages/Feedback";
+import FeedbackDetails from "./pages/FeedbackDetails";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           </Route>
 
           <Route path="/feedback">
-            <Feedback />
+            <FeedbackDetails />
           </Route>
         </Switch>
       </Router>
