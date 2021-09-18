@@ -11,6 +11,7 @@ const InnerComments = () => {
   };
 
   const handleReply = (e) => {
+    e.preventDefault();
     setReply((reply) => !reply);
   };
 
@@ -35,9 +36,14 @@ const InnerComments = () => {
 
         <div className="feedback__content-bottom">
           <p>
-            Awesome idea! Trying to find framework-specific projects within the
-            hubs can be tedious.
+            <span>@upbeat1881</span> Naisu!! You're correct!
           </p>
+
+          <div className="feedback__content-delete">
+            <button>
+              <Icon icon="mdi:delete" className="delete-btn" />
+            </button>
+          </div>
 
           {reply && (
             <form className="feedback__content-bottom-reply">
@@ -68,112 +74,6 @@ const StyledInnerComments = styled.div`
   display: flex;
   margin-top: 35px;
   margin-left: -51px;
-
-  img {
-    align-self: flex-start;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: contain;
-  }
-
-  .feedback__comments-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin-left: 40px;
-
-    .feedback__content-top {
-      display: flex;
-      justify-content: space-between;
-
-      .feedback__content-top-user-details {
-        p {
-          color: #3a4374;
-          font-weight: 700;
-          font-size: 14px;
-        }
-
-        span {
-          color: #647196;
-          font-size: 14px;
-        }
-      }
-
-      .feedback__content-reply-btn {
-        background: none;
-        border: none;
-        color: #4661e6;
-        cursor: pointer;
-        font-weight: 700;
-      }
-    }
-
-    .feedback__content-bottom {
-      margin-top: 20px;
-
-      p {
-        color: #647196;
-        font-size: 16px;
-      }
-
-      .feedback__content-bottom-reply {
-        margin-top: 15px;
-        border-radius: 10px;
-        background-color: #f7f8fd;
-        display: flex;
-        padding: 15px;
-
-        textarea {
-          flex: 1;
-          height: 110px;
-          border: none;
-          background-color: #f7f8fd;
-          resize: none;
-          font-size: 17px;
-          color: #647196;
-
-          &:focus {
-            outline: none;
-          }
-
-          &::placeholder {
-            color: #647196;
-            opacity: 0.7;
-            font-size: 14px;
-          }
-        }
-
-        button {
-          background: none;
-          border: none;
-          outline: none;
-          align-self: flex-end;
-          cursor: pointer;
-
-          .reply-icon {
-            height: 25px;
-            width: 25px;
-            color: #4661e6;
-            transition: color 0.2s ease-in;
-
-            &:hover {
-              color: #ad1fea;
-              transition: color 0.2s ease-in;
-            }
-
-            &.disabled {
-              color: rgba(0, 0, 0, 0.2);
-              transition: color 0.2s ease-in-out;
-            }
-          }
-
-          &.disabled {
-            cursor: not-allowed;
-            pointer-events: none;
-          }
-        }
-      }
-    }
-  }
+  padding-left: 15px;
+  border-left: 0.2px solid rgba(0, 0, 0, 0.07);
 `;

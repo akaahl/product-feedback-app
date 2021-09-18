@@ -12,6 +12,7 @@ const Comments = () => {
   };
 
   const handleReply = (e) => {
+    e.preventDefault();
     setReply((reply) => !reply);
   };
 
@@ -59,7 +60,8 @@ const Comments = () => {
           )}
         </div>
 
-        <InnerComments />
+        {/* <InnerComments /> */}
+        <hr />
       </div>
     </StyledComments>
   );
@@ -70,6 +72,8 @@ export default Comments;
 const StyledComments = styled.div`
   display: flex;
   margin-top: 15px;
+  padding-bottom: 15px;
+  /* border-bottom: 0.2px solid rgba(0, 0, 0, 0.1); */
 
   img {
     align-self: flex-start;
@@ -117,6 +121,39 @@ const StyledComments = styled.div`
       p {
         color: #647196;
         font-size: 16px;
+
+        span {
+          color: #ad1fea;
+          font-weight: 600;
+          font-size: 15px;
+        }
+      }
+
+      .feedback__content-delete {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        display: flex;
+
+        button {
+          margin: 0 0 0 auto;
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          .delete-btn {
+            color: #647196;
+            opacity: 0.5;
+            height: 22px;
+            width: 22px;
+            transition: opacity 0.2s ease-in-out;
+          }
+
+          &:hover {
+            .delete-btn {
+              opacity: 1;
+            }
+          }
+        }
       }
 
       .feedback__content-bottom-reply {
@@ -176,6 +213,12 @@ const StyledComments = styled.div`
           }
         }
       }
+    }
+
+    hr {
+      margin-top: 25px;
+      margin-left: -51px;
+      border: 0.2px solid rgba(0, 0, 0, 0.05);
     }
   }
 `;

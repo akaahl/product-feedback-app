@@ -3,6 +3,7 @@ import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
 import Comments from "../components/FeedbackDetails/Comments";
+import AddComment from "../components/FeedbackDetails/AddComment";
 
 const FeedbackDetails = () => {
   return (
@@ -29,7 +30,10 @@ const FeedbackDetails = () => {
         <h4>2 Comments</h4>
 
         <Comments />
+        <Comments />
       </section>
+
+      <AddComment />
     </StyledFeedback>
   );
 };
