@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
-import InnerComments from "./InnerComments";
 
-const Comments = () => {
+const InnerComments = () => {
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -16,7 +15,7 @@ const Comments = () => {
   };
 
   return (
-    <StyledComments>
+    <StyledInnerComments>
       <img
         src={process.env.PUBLIC_URL + "user-images/image-suzanne.jpg"}
         alt="suzanne"
@@ -58,18 +57,17 @@ const Comments = () => {
             </form>
           )}
         </div>
-
-        <InnerComments />
       </div>
-    </StyledComments>
+    </StyledInnerComments>
   );
 };
 
-export default Comments;
+export default InnerComments;
 
-const StyledComments = styled.div`
+const StyledInnerComments = styled.div`
   display: flex;
-  margin-top: 15px;
+  margin-top: 35px;
+  margin-left: -51px;
 
   img {
     align-self: flex-start;
