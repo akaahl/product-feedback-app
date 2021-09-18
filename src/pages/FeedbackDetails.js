@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
+import Comments from "../components/FeedbackDetails/Comments";
 
 const FeedbackDetails = () => {
   return (
@@ -27,30 +28,7 @@ const FeedbackDetails = () => {
       <section className="feedback__comments">
         <h4>2 Comments</h4>
 
-        <div className="feedback__comments-individual-comments">
-          <img
-            src={process.env.PUBLIC_URL + "user-images/image-suzanne.jpg"}
-            alt="suzanne"
-          />
-
-          <div className="feedback__comments-content">
-            <div className="feedback__content-top">
-              <div className="feedback__content-top-user-details">
-                <p>Suzanne Change</p>
-                <span>@upbeat1811</span>
-              </div>
-
-              <button className="feedback__content-reply-btn">Reply</button>
-            </div>
-
-            <div className="feedback__content-bottom">
-              <p>
-                Awesome idea! Trying to find framework-specific projects within
-                the hubs can be tedious.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Comments />
       </section>
     </StyledFeedback>
   );
@@ -114,26 +92,12 @@ const StyledFeedback = styled.main`
     background-color: #ffffff;
     border-radius: 10px;
 
-    .feedback__comments-individual-comments {
-      display: flex;
-      margin-top: 15px;
+    &.feedback__comments {
+      padding: 25px;
 
-      img {
-        /* flex: 0.1; */
-        align-self: flex-start;
-        /* height: 10%;
-        width: 10%; */
-        height: 50px;
-        width: 50px;
-        /* transform: scale(0.6); */
-        border-radius: 50%;
-        object-fit: contain;
-      }
-
-      .feedback__comments-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+      h4 {
+        color: #3a4374;
+        font-size: 20px;
       }
     }
   }
