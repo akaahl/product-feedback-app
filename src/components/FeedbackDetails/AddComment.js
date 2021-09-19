@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Comments from "./Comments";
 
 const AddComment = () => {
+  const [comment, setComment] = useState("");
+
+  const handleComment = (e) => {
+    setComment((comment) => e.target.value);
+    console.log(comment);
+  };
+
+  const handleKeyPress = (e) => {
+    return comment.length === 250 ? e.preventDefault() : null;
+  };
+
   return (
     <StyledAddComment>
       <h4>Add Comment</h4>
+
+      <form>
+        <textarea
+          name="addComment"
+          placeholder="Type your comment here"
+          value={comment}
+          onChange={handleComment}
+          onKeyPress={handleKeyPress}
+        ></textarea>
+
+        <div className="addComment__submit">
+          <span className="addComment__submit-comments-length">
+            {comment.length} / 250
+          </span>
+
+          <button type="submit">Post Comment</button>
+        </div>
+      </form>
     </StyledAddComment>
   );
 };
@@ -21,5 +51,67 @@ const StyledAddComment = styled.div`
     color: #3a4374;
     font-weight: 700;
     font-size: 20px;
+  }
+
+  form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      border: none;
+      background-color: #f7f8fd;
+      border-radius: 5px;
+      height: 150px;
+      resize: none;
+      outline: none;
+      padding: 15px;
+      color: #647196;
+      font-size: 17px;
+      transition: all 0.3s ease-in;
+
+      &::placeholder {
+        color: #647196;
+        opacity: 0.7;
+        font-size: 14px;
+      }
+
+      &:focus {
+        border: 1px solid #4661e6;
+        /* transition: border 0.3s ease-in; */
+      }
+    }
+
+    .addComment__submit {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .addComment__submit-comments-length {
+        font-size: 12px;
+        color: #647196;
+      }
+
+      button {
+        border: none;
+        background-color: #ad1fea;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: #c75af6;
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
   }
 `;

@@ -60,7 +60,7 @@ const Comments = () => {
           )}
         </div>
 
-        {/* <InnerComments /> */}
+        <InnerComments />
         <hr />
       </div>
     </StyledComments>
