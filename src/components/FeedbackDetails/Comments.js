@@ -57,15 +57,13 @@ const Comments = ({ id, content, imageUrl, name, username, replies }) => {
           )}
         </div>
 
-        {/* <InnerComments /> */}
-
         {replies &&
           replies.map(
             (
               { content, replyingTo, user: { image, name, username } },
               index
             ) => (
-              <Comments
+              <InnerComments
                 key={index}
                 content={content}
                 replyingTo={replyingTo}
@@ -87,7 +85,6 @@ const StyledComments = styled.div`
   display: flex;
   margin-top: 15px;
   padding-bottom: 15px;
-  /* border-bottom: 0.2px solid rgba(0, 0, 0, 0.1); */
 
   img {
     align-self: flex-start;
@@ -135,6 +132,7 @@ const StyledComments = styled.div`
       p {
         color: #647196;
         font-size: 16px;
+        margin-bottom: 10px;
 
         span {
           color: #ad1fea;

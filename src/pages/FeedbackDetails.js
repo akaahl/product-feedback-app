@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
@@ -20,6 +20,10 @@ const FeedbackDetails = () => {
     e.preventDefault();
     history.push("/");
   };
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("data"));
+  }, [data]);
 
   return (
     <StyledFeedback>
@@ -62,7 +66,7 @@ const FeedbackDetails = () => {
           )}
       </section>
 
-      <AddComment />
+      <AddComment id={+id} />
     </StyledFeedback>
   );
 };
@@ -131,6 +135,7 @@ const StyledFeedback = styled.main`
       h4 {
         color: #3a4374;
         font-size: 20px;
+        margin-bottom: 30px;
       }
     }
   }

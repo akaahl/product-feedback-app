@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 
-const InnerComments = () => {
+const InnerComments = ({ content, replyingTo, imageUrl, name, username }) => {
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -17,16 +17,13 @@ const InnerComments = () => {
 
   return (
     <StyledInnerComments>
-      <img
-        src={process.env.PUBLIC_URL + "user-images/image-suzanne.jpg"}
-        alt="suzanne"
-      />
+      <img src={process.env.PUBLIC_URL + "/" + imageUrl} alt={name} />
 
       <div className="feedback__comments-content">
         <div className="feedback__content-top">
           <div className="feedback__content-top-user-details">
-            <p>Suzanne Change</p>
-            <span>@upbeat1811</span>
+            <p>{name}</p>
+            <span>@{username}</span>
           </div>
 
           <button className="feedback__content-reply-btn" onClick={handleReply}>
@@ -36,7 +33,7 @@ const InnerComments = () => {
 
         <div className="feedback__content-bottom">
           <p>
-            <span>@upbeat1881</span> Naisu!! You're correct!
+            <span>@{username}</span> {content}
           </p>
 
           <div className="feedback__content-delete">

@@ -1,13 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const AddComment = () => {
+const AddComment = ({ id }) => {
   const [comment, setComment] = useState("");
 
   const handleComment = (e) => {
     setComment((comment) => e.target.value);
 
     if (comment.length >= 250) setComment((comment) => comment.slice(0, 250));
+  };
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    const user = JSON.parse(localStorage.getItem("data")).currentUser;
+
+    const data = JSON.parse(localStorage.getItem("data"));
+    data.productRequests.map((feedback) => {
+      if (feedback.id === id) {
+        const commentId =
+          feedback.comments[feedback.comments.length - 1].id + 1;
+
+        const userComment = { id: commentId, content: comment, user };
+        feedback.comments.push(userComment);
+      }
+      return null;
+    });
+
+    localStorage.setItem("data", JSON.stringify(data));
+
+    // Use dispatch events to update data
   };
 
   return (
@@ -27,7 +48,9 @@ const AddComment = () => {
             {comment.length} / 250
           </span>
 
-          <button type="submit">Post Comment</button>
+          <button type="submit" onClick={handleAddComment}>
+            Post Comment
+          </button>
         </div>
       </form>
     </StyledAddComment>
