@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comments from "./Comments";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
 
   const handleComment = (e) => {
     setComment((comment) => e.target.value);
-    console.log(comment);
-  };
 
-  const handleKeyPress = (e) => {
-    return comment.length === 250 ? e.preventDefault() : null;
+    if (comment.length >= 250) setComment((comment) => comment.slice(0, 250));
   };
 
   return (
@@ -24,7 +20,6 @@ const AddComment = () => {
           placeholder="Type your comment here"
           value={comment}
           onChange={handleComment}
-          onKeyPress={handleKeyPress}
         ></textarea>
 
         <div className="addComment__submit">
