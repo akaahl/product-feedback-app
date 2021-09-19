@@ -33,6 +33,7 @@ const UpvoteButton = ({ upvotes, id }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (!upvoteStatus) {
       const updatedData = {

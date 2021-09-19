@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import InnerComments from "./InnerComments";
 
-const Comments = () => {
+const Comments = ({ id, content, imageUrl, name, username, replies }) => {
+  console.log(imageUrl);
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -16,18 +17,17 @@ const Comments = () => {
     setReply((reply) => !reply);
   };
 
+  console.log(replies);
+
   return (
     <StyledComments>
-      <img
-        src={process.env.PUBLIC_URL + "user-images/image-suzanne.jpg"}
-        alt="suzanne"
-      />
+      <img src={process.env.PUBLIC_URL + "/" + imageUrl} alt={name} />
 
       <div className="feedback__comments-content">
         <div className="feedback__content-top">
           <div className="feedback__content-top-user-details">
-            <p>Suzanne Change</p>
-            <span>@upbeat1811</span>
+            <p>{name}</p>
+            <span>@{username}</span>
           </div>
 
           <button className="feedback__content-reply-btn" onClick={handleReply}>
@@ -36,10 +36,7 @@ const Comments = () => {
         </div>
 
         <div className="feedback__content-bottom">
-          <p>
-            Awesome idea! Trying to find framework-specific projects within the
-            hubs can be tedious.
-          </p>
+          <p>{content}</p>
 
           {reply && (
             <form className="feedback__content-bottom-reply">
@@ -60,7 +57,24 @@ const Comments = () => {
           )}
         </div>
 
-        <InnerComments />
+        {/* <InnerComments /> */}
+
+        {replies &&
+          replies.map(
+            (
+              { content, replyingTo, user: { image, name, username } },
+              index
+            ) => (
+              <Comments
+                key={index}
+                content={content}
+                replyingTo={replyingTo}
+                imageUrl={image}
+                name={name}
+                username={username}
+              />
+            )
+          )}
         <hr />
       </div>
     </StyledComments>

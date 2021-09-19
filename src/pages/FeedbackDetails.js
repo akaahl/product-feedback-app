@@ -4,22 +4,27 @@ import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
 import Comments from "../components/FeedbackDetails/Comments";
 import AddComment from "../components/FeedbackDetails/AddComment";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { totalComments } from "../utils/utilityFunctions";
 
 const FeedbackDetails = () => {
+  const history = useHistory();
   const { id } = useParams();
   const data = JSON.parse(localStorage.getItem("data"));
   const productRequests = data.productRequests;
   const feedback = productRequests.filter((item) => item.id === +id)[0];
   const { title, category, upvotes, status, description, comments, upvoted } =
     feedback;
-  console.log(title);
+
+  const handleBackBtn = (e) => {
+    e.preventDefault();
+    history.push("/");
+  };
 
   return (
     <StyledFeedback>
       <nav className="feedback__nav">
-        <button className="feedback__nav-back-btn">
+        <button className="feedback__nav-back-btn" onClick={handleBackBtn}>
           <img src={arrowLeftIcon} alt="arrow left" />
           Go Back
         </button>
@@ -41,8 +46,20 @@ const FeedbackDetails = () => {
       <section className="feedback__comments">
         <h4>{totalComments(comments)} Comments</h4>
 
-        {/* <Comments />
-        <Comments /> */}
+        {comments &&
+          comments.map(
+            ({ id, content, replies, user: { image, name, username } }) => (
+              <Comments
+                key={id}
+                id={id}
+                content={content}
+                imageUrl={image}
+                name={name}
+                username={username}
+                replies={replies}
+              />
+            )
+          )}
       </section>
 
       <AddComment />
