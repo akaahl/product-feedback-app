@@ -3,10 +3,16 @@ import styled from "styled-components";
 import commentsIcon from "../../../assets/shared/icon-comments.svg";
 import { totalComments } from "../../../utils/utilityFunctions";
 import UpvoteButton from "./UpvoteButton";
+import { useHistory } from "react-router-dom";
 
 const Feedback = ({ upvotes, title, id, description, comments, category }) => {
+  const history = useHistory();
+
+  const showFeedback = (e) => {
+    history.push(`/feedback/${id}`);
+  };
   return (
-    <FeedbackContainer>
+    <FeedbackContainer onClick={showFeedback}>
       <UpvoteButton upvotes={upvotes} id={id} />
 
       <div className="feedback__content">

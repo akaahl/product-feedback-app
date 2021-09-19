@@ -29,8 +29,8 @@ const FeedbackDetails = () => {
       <section className="feedback__comments">
         <h4>2 Comments</h4>
 
-        <Comments />
-        <Comments />
+        {/* <Comments />
+        <Comments /> */}
       </section>
 
       <AddComment />
