@@ -5,14 +5,23 @@ import { totalComments } from "../../../utils/utilityFunctions";
 import UpvoteButton from "./UpvoteButton";
 import { useHistory } from "react-router-dom";
 
-const Feedback = ({ upvotes, title, id, description, comments, category }) => {
+const Feedback = ({
+  upvotes,
+  title,
+  id,
+  description,
+  comments,
+  category,
+  preventRedirect,
+}) => {
   const history = useHistory();
 
   const showFeedback = (e) => {
     history.push(`/feedback/${id}`);
+    console.log("yes");
   };
   return (
-    <FeedbackContainer onClick={showFeedback}>
+    <FeedbackContainer onClick={preventRedirect ? null : showFeedback}>
       <UpvoteButton upvotes={upvotes} id={id} />
 
       <div className="feedback__content">

@@ -4,8 +4,18 @@ import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
 import Comments from "../components/FeedbackDetails/Comments";
 import AddComment from "../components/FeedbackDetails/AddComment";
+import { useParams } from "react-router-dom";
+import { totalComments } from "../utils/utilityFunctions";
 
 const FeedbackDetails = () => {
+  const { id } = useParams();
+  const data = JSON.parse(localStorage.getItem("data"));
+  const productRequests = data.productRequests;
+  const feedback = productRequests.filter((item) => item.id === +id)[0];
+  const { title, category, upvotes, status, description, comments, upvoted } =
+    feedback;
+  console.log(title);
+
   return (
     <StyledFeedback>
       <nav className="feedback__nav">
@@ -18,16 +28,18 @@ const FeedbackDetails = () => {
       </nav>
 
       <Feedback
-        upvotes={112}
-        title="Add tags for solutions"
-        id={1}
-        description="Easier to search for solutions based on a specific stack"
-        category="enhancement"
-        key={2}
+        upvotes={upvotes}
+        title={title}
+        id={+id}
+        description={description}
+        comments={comments}
+        category={category}
+        preventRedirect={true}
+        key={id}
       />
 
       <section className="feedback__comments">
-        <h4>2 Comments</h4>
+        <h4>{totalComments(comments)} Comments</h4>
 
         {/* <Comments />
         <Comments /> */}
