@@ -6,24 +6,25 @@ import Comments from "../components/FeedbackDetails/Comments";
 import AddComment from "../components/FeedbackDetails/AddComment";
 import { useParams, useHistory } from "react-router-dom";
 import { totalComments } from "../utils/utilityFunctions";
+import { useSelector } from "react-redux";
 
 const FeedbackDetails = () => {
   const history = useHistory();
   const { id } = useParams();
-  const data = JSON.parse(localStorage.getItem("data"));
+  const data = useSelector((state) => state.data);
   const productRequests = data.productRequests;
   const feedback = productRequests.filter((item) => item.id === +id)[0];
-  const { title, category, upvotes, status, description, comments, upvoted } =
-    feedback;
+  const { title, category, upvotes, description, comments } = feedback;
 
   const handleBackBtn = (e) => {
     e.preventDefault();
     history.push("/");
   };
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("data"));
-  }, [data]);
+  // useEffect(() => {
+
+  //   const data =
+  // }, [data]);
 
   return (
     <StyledFeedback>

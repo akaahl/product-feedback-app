@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../actions/dataActions";
 
 const AddComment = ({ id }) => {
+  const dispatch = useDispatch();
   const [comment, setComment] = useState("");
 
   const handleComment = (e) => {
@@ -27,6 +30,7 @@ const AddComment = ({ id }) => {
     });
 
     localStorage.setItem("data", JSON.stringify(data));
+    dispatch(updateData(data));
 
     // Use dispatch events to update data
   };
