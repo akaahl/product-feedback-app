@@ -39,11 +39,6 @@ const Comments = ({
         );
 
         feedback.comments = updatedComments;
-        // console.log(
-        //   feedback.comments.filter((comment) =>
-        //     console.log(comment.id !== commentId)
-        //   )
-        // );
       }
 
       return null;
@@ -51,9 +46,37 @@ const Comments = ({
 
     localStorage.setItem("data", JSON.stringify(data));
     dispatch(updateData(data));
-    // console.log(data);
-    // console.log(typeof feedbackId);
-    // console.log(typeof commentId);
+  };
+
+  const addInnerReplies = (e) => {
+    e.preventDefault();
+
+    const currentUser = JSON.parse(localStorage.getItem("data")).currentUser;
+
+    const data = JSON.parse(localStorage.getItem("data"));
+
+    data.productRequests.map((feedback) => {
+      if (feedback.id === feedbackId) {
+        feedback.comments.forEach((comment) => {
+          const innerReply = {
+            content: textArea,
+            replyingTo: username,
+            user: currentUser,
+          };
+
+          if (!comment.replies) comment.replies = [];
+
+          comment.replies.push(innerReply);
+        });
+      }
+
+      return null;
+    });
+
+    localStorage.setItem("data", JSON.stringify(data));
+    dispatch(updateData(data));
+    setTextArea((text) => "");
+    setReply((reply) => false);
   };
 
   return (
@@ -79,12 +102,15 @@ const Comments = ({
             <form className="feedback__content-bottom-reply">
               <textarea
                 name="replyComment"
-                placeholder="Replying to @upbeat1811"
+                placeholder={`Replying to @${username}`}
                 value={textArea}
                 onChange={handleChange}
               ></textarea>
 
-              <button className={textArea ? "" : "disabled"}>
+              <button
+                className={textArea ? "" : "disabled"}
+                onClick={addInnerReplies}
+              >
                 <Icon
                   icon="mdi:send-circle-outline"
                   className={textArea ? "reply-icon" : "reply-icon disabled"}
@@ -115,6 +141,8 @@ const Comments = ({
                 imageUrl={image}
                 name={name}
                 username={username}
+                commentId={commentId}
+                feedbackId={feedbackId}
               />
             )
           )}

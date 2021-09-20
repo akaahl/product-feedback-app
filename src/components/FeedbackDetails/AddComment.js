@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 
-const AddComment = ({ id }) => {
+const AddComment = ({ feedbackId }) => {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
 
@@ -19,7 +19,7 @@ const AddComment = ({ id }) => {
 
     const data = JSON.parse(localStorage.getItem("data"));
     data.productRequests.map((feedback) => {
-      if (feedback.id === id) {
+      if (feedback.id === feedbackId) {
         const commentId =
           feedback.comments[feedback.comments.length - 1].id + 1;
         const userComment = { id: commentId, content: comment, user };

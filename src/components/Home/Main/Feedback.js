@@ -18,7 +18,6 @@ const Feedback = ({
 
   const showFeedback = (e) => {
     history.push(`/feedback/${id}`);
-    console.log("yes");
   };
   return (
     <FeedbackContainer onClick={preventRedirect ? null : showFeedback}>

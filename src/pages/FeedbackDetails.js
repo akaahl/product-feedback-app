@@ -64,7 +64,7 @@ const FeedbackDetails = () => {
           )}
       </section>
 
-      <AddComment id={+feedbackId} />
+      <AddComment feedbackId={+feedbackId} />
     </StyledFeedback>
   );
 };

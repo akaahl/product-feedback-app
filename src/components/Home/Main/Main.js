@@ -98,7 +98,6 @@ const Main = () => {
     e.preventDefault();
     setShowOptions(!showOptions);
     document.addEventListener("click", closeOptions);
-    console.log("yes");
   };
 
   return (

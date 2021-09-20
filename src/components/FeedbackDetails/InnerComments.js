@@ -2,17 +2,41 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 
-const InnerComments = ({ content, replyingTo, imageUrl, name, username }) => {
+const InnerComments = ({
+  content,
+  replyingTo,
+  imageUrl,
+  name,
+  username,
+  feedbackId,
+  commentId,
+}) => {
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
   const handleChange = (e) => {
     setTextArea((text) => e.target.value);
+    console.log(textArea);
   };
 
   const handleReply = (e) => {
     e.preventDefault();
     setReply((reply) => !reply);
+  };
+
+  const addInnerReplies = (e) => {
+    e.preventDefault();
+    console.log("inner replies");
+
+    // const data = JSON.parse(localStorage.getItem("data"));
+
+    // data.productRequests.map((feedback) => {
+    //   if (feedback.id === feedbackId) {
+    //     console.log(true);
+    //   }
+
+    //   return null;
+    // });
   };
 
   return (
@@ -33,7 +57,7 @@ const InnerComments = ({ content, replyingTo, imageUrl, name, username }) => {
 
         <div className="feedback__content-bottom">
           <p>
-            <span>@{username}</span> {content}
+            <span>@{replyingTo}</span> {content}
           </p>
 
           {name.trim() === "Zena Kelley" ? (
@@ -48,12 +72,15 @@ const InnerComments = ({ content, replyingTo, imageUrl, name, username }) => {
             <form className="feedback__content-bottom-reply">
               <textarea
                 name="replyComment"
-                placeholder="Replying to @upbeat1811"
+                placeholder={`Replying to @${username}`}
                 value={textArea}
                 onChange={handleChange}
               ></textarea>
 
-              <button className={textArea ? "" : "disabled"}>
+              <button
+                className={textArea ? "" : "disabled"}
+                onClick={addInnerReplies}
+              >
                 <Icon
                   icon="mdi:send-circle-outline"
                   className={textArea ? "reply-icon" : "reply-icon disabled"}
