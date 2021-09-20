@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
@@ -20,11 +20,6 @@ const FeedbackDetails = () => {
     e.preventDefault();
     history.push("/");
   };
-
-  // useEffect(() => {
-
-  //   const data =
-  // }, [data]);
 
   return (
     <StyledFeedback>

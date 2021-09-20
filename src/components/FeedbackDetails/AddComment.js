@@ -31,8 +31,7 @@ const AddComment = ({ id }) => {
 
     localStorage.setItem("data", JSON.stringify(data));
     dispatch(updateData(data));
-
-    // Use dispatch events to update data
+    setComment((comment) => "");
   };
 
   return (

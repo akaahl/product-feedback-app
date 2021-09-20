@@ -4,7 +4,6 @@ import { Icon } from "@iconify/react";
 import InnerComments from "./InnerComments";
 
 const Comments = ({ id, content, imageUrl, name, username, replies }) => {
-  console.log(imageUrl);
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -17,7 +16,7 @@ const Comments = ({ id, content, imageUrl, name, username, replies }) => {
     setReply((reply) => !reply);
   };
 
-  console.log(replies);
+  console.log(name);
 
   return (
     <StyledComments>
@@ -55,6 +54,14 @@ const Comments = ({ id, content, imageUrl, name, username, replies }) => {
               </button>
             </form>
           )}
+
+          {name.trim() === "Zena Kelley" ? (
+            <div className="feedback__content-delete">
+              <button>
+                <Icon icon="mdi:delete" className="delete-btn" />
+              </button>
+            </div>
+          ) : null}
         </div>
 
         {replies &&

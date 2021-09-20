@@ -36,11 +36,13 @@ const InnerComments = ({ content, replyingTo, imageUrl, name, username }) => {
             <span>@{username}</span> {content}
           </p>
 
-          <div className="feedback__content-delete">
-            <button>
-              <Icon icon="mdi:delete" className="delete-btn" />
-            </button>
-          </div>
+          {name.trim() === "Zena Kelley" ? (
+            <div className="feedback__content-delete">
+              <button>
+                <Icon icon="mdi:delete" className="delete-btn" />
+              </button>
+            </div>
+          ) : null}
 
           {reply && (
             <form className="feedback__content-bottom-reply">
