@@ -48,9 +48,7 @@ const Comments = ({
     dispatch(updateData(data));
   };
 
-  const addInnerReplies = (e) => {
-    e.preventDefault();
-
+  const addInnerReplies = (text, user, feedbackId, commentId) => {
     const currentUser = JSON.parse(localStorage.getItem("data")).currentUser;
 
     const data = JSON.parse(localStorage.getItem("data"));
@@ -58,15 +56,17 @@ const Comments = ({
     data.productRequests.map((feedback) => {
       if (feedback.id === feedbackId) {
         feedback.comments.forEach((comment) => {
-          const innerReply = {
-            content: textArea,
-            replyingTo: username,
-            user: currentUser,
-          };
+          if (comment.id === commentId) {
+            const innerReply = {
+              content: text,
+              replyingTo: user,
+              user: currentUser,
+            };
 
-          if (!comment.replies) comment.replies = [];
+            if (!comment.replies) comment.replies = [];
 
-          comment.replies.push(innerReply);
+            comment.replies.push(innerReply);
+          }
         });
       }
 
@@ -75,8 +75,6 @@ const Comments = ({
 
     localStorage.setItem("data", JSON.stringify(data));
     dispatch(updateData(data));
-    setTextArea((text) => "");
-    setReply((reply) => false);
   };
 
   return (
@@ -109,7 +107,12 @@ const Comments = ({
 
               <button
                 className={textArea ? "" : "disabled"}
-                onClick={addInnerReplies}
+                onClick={(e) => {
+                  e.preventDefault();
+                  addInnerReplies(textArea, username, feedbackId, commentId);
+                  setTextArea((text) => "");
+                  setReply((reply) => false);
+                }}
               >
                 <Icon
                   icon="mdi:send-circle-outline"
@@ -143,6 +146,7 @@ const Comments = ({
                 username={username}
                 commentId={commentId}
                 feedbackId={feedbackId}
+                addInnerReplies={addInnerReplies}
               />
             )
           )}

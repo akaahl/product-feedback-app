@@ -10,13 +10,13 @@ const InnerComments = ({
   username,
   feedbackId,
   commentId,
+  addInnerReplies,
 }) => {
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
   const handleChange = (e) => {
     setTextArea((text) => e.target.value);
-    console.log(textArea);
   };
 
   const handleReply = (e) => {
@@ -24,20 +24,35 @@ const InnerComments = ({
     setReply((reply) => !reply);
   };
 
-  const addInnerReplies = (e) => {
-    e.preventDefault();
-    console.log("inner replies");
+  // const addInnerReplies = (e) => {
+  //   e.preventDefault();
 
-    // const data = JSON.parse(localStorage.getItem("data"));
+  //   const currentUser = JSON.parse(localStorage.getItem("data")).currentUser;
 
-    // data.productRequests.map((feedback) => {
-    //   if (feedback.id === feedbackId) {
-    //     console.log(true);
-    //   }
+  //   const data = JSON.parse(localStorage.getItem("data"));
 
-    //   return null;
-    // });
-  };
+  //   data.productRequests.map((feedback) => {
+  //     if (feedback.id === feedbackId) {
+  //       feedback.comments.forEach((comment) => {
+  //         if (comment.id === commentId) {
+  //           const innerReply = {
+  //             content: textArea,
+  //             replyingTo: username,
+  //             user: currentUser,
+  //           };
+
+  //           if (!comment.replies) comment.replies = [];
+
+  //           comment.replies.push(innerReply);
+  //         }
+  //       });
+  //     }
+
+  //     return null;
+  //   });
+
+  //   console.log(data);
+  // };
 
   return (
     <StyledInnerComments>
@@ -79,7 +94,12 @@ const InnerComments = ({
 
               <button
                 className={textArea ? "" : "disabled"}
-                onClick={addInnerReplies}
+                onClick={(e) => {
+                  e.preventDefault();
+                  addInnerReplies(textArea, username, feedbackId, commentId);
+                  setTextArea((text) => "");
+                  setReply((reply) => false);
+                }}
               >
                 <Icon
                   icon="mdi:send-circle-outline"
