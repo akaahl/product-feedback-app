@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
+import { v4 as uuidv4 } from "uuid";
 
 const InnerComments = ({
   content,
@@ -10,6 +11,7 @@ const InnerComments = ({
   username,
   feedbackId,
   commentId,
+  innerCommentId,
   addInnerReplies,
 }) => {
   const [textArea, setTextArea] = useState("");
@@ -24,35 +26,24 @@ const InnerComments = ({
     setReply((reply) => !reply);
   };
 
-  // const addInnerReplies = (e) => {
-  //   e.preventDefault();
+  const deleteInnerReply = () => {
+    const data = JSON.parse(localStorage.getItem("data"));
 
-  //   const currentUser = JSON.parse(localStorage.getItem("data")).currentUser;
+    data.productRequests.forEach((feedback) => {
+      if (feedback.id === feedbackId) {
+        feedback.comments.forEach((comment) => {
+          if (comment.id === commentId) {
+            const updatedReplies = comment.replies.filter(
+              (reply) => reply.content !== content
+            );
+            comment.replies = updatedReplies;
+          }
+        });
+      }
+    });
 
-  //   const data = JSON.parse(localStorage.getItem("data"));
-
-  //   data.productRequests.map((feedback) => {
-  //     if (feedback.id === feedbackId) {
-  //       feedback.comments.forEach((comment) => {
-  //         if (comment.id === commentId) {
-  //           const innerReply = {
-  //             content: textArea,
-  //             replyingTo: username,
-  //             user: currentUser,
-  //           };
-
-  //           if (!comment.replies) comment.replies = [];
-
-  //           comment.replies.push(innerReply);
-  //         }
-  //       });
-  //     }
-
-  //     return null;
-  //   });
-
-  //   console.log(data);
-  // };
+    console.log(data);
+  };
 
   return (
     <StyledInnerComments>
@@ -77,7 +68,7 @@ const InnerComments = ({
 
           {name.trim() === "Zena Kelley" ? (
             <div className="feedback__content-delete">
-              <button>
+              <button onClick={deleteInnerReply}>
                 <Icon icon="mdi:delete" className="delete-btn" />
               </button>
             </div>

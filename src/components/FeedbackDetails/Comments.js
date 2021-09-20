@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import InnerComments from "./InnerComments";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
+import { v4 as uuidv4 } from "uuid";
 
 const Comments = ({
   commentId,
@@ -58,6 +59,7 @@ const Comments = ({
         feedback.comments.forEach((comment) => {
           if (comment.id === commentId) {
             const innerReply = {
+              id: uuidv4(),
               content: text,
               replyingTo: user,
               user: currentUser,
@@ -138,7 +140,8 @@ const Comments = ({
               index
             ) => (
               <InnerComments
-                key={index}
+                key={uuidv4()}
+                innerCommentId={uuidv4()}
                 content={content}
                 replyingTo={replyingTo}
                 imageUrl={image}
