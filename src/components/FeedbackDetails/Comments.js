@@ -2,8 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import InnerComments from "./InnerComments";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../actions/dataActions";
 
-const Comments = ({ id, content, imageUrl, name, username, replies }) => {
+const Comments = ({
+  commentId,
+  feedbackId,
+  content,
+  imageUrl,
+  name,
+  username,
+  replies,
+}) => {
+  const dispatch = useDispatch();
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -16,7 +27,34 @@ const Comments = ({ id, content, imageUrl, name, username, replies }) => {
     setReply((reply) => !reply);
   };
 
-  console.log(name);
+  const deleteComment = (e) => {
+    e.preventDefault();
+
+    const data = JSON.parse(localStorage.getItem("data"));
+
+    data.productRequests.map((feedback) => {
+      if (feedback.id === feedbackId) {
+        const updatedComments = feedback.comments.filter(
+          (comment) => comment.id !== commentId
+        );
+
+        feedback.comments = updatedComments;
+        // console.log(
+        //   feedback.comments.filter((comment) =>
+        //     console.log(comment.id !== commentId)
+        //   )
+        // );
+      }
+
+      return null;
+    });
+
+    localStorage.setItem("data", JSON.stringify(data));
+    dispatch(updateData(data));
+    // console.log(data);
+    // console.log(typeof feedbackId);
+    // console.log(typeof commentId);
+  };
 
   return (
     <StyledComments>
@@ -57,7 +95,7 @@ const Comments = ({ id, content, imageUrl, name, username, replies }) => {
 
           {name.trim() === "Zena Kelley" ? (
             <div className="feedback__content-delete">
-              <button>
+              <button type="button" onClick={deleteComment}>
                 <Icon icon="mdi:delete" className="delete-btn" />
               </button>
             </div>

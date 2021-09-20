@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const FeedbackDetails = () => {
   const history = useHistory();
   const { id } = useParams();
+  const feedbackId = id;
   const data = useSelector((state) => state.data);
   const productRequests = data.productRequests;
   const feedback = productRequests.filter((item) => item.id === +id)[0];
@@ -35,7 +36,7 @@ const FeedbackDetails = () => {
       <Feedback
         upvotes={upvotes}
         title={title}
-        id={+id}
+        id={+feedbackId}
         description={description}
         comments={comments}
         category={category}
@@ -51,7 +52,8 @@ const FeedbackDetails = () => {
             ({ id, content, replies, user: { image, name, username } }) => (
               <Comments
                 key={id}
-                id={id}
+                commentId={id}
+                feedbackId={+feedbackId}
                 content={content}
                 imageUrl={image}
                 name={name}
@@ -62,7 +64,7 @@ const FeedbackDetails = () => {
           )}
       </section>
 
-      <AddComment id={+id} />
+      <AddComment id={+feedbackId} />
     </StyledFeedback>
   );
 };

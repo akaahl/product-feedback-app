@@ -22,7 +22,6 @@ const AddComment = ({ id }) => {
       if (feedback.id === id) {
         const commentId =
           feedback.comments[feedback.comments.length - 1].id + 1;
-
         const userComment = { id: commentId, content: comment, user };
         feedback.comments.push(userComment);
       }
