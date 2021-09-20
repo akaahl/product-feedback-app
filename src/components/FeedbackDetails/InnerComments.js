@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../actions/dataActions";
 
 const InnerComments = ({
   content,
+  index,
   replyingTo,
   imageUrl,
   name,
@@ -14,6 +17,7 @@ const InnerComments = ({
   innerCommentId,
   addInnerReplies,
 }) => {
+  const dispatch = useDispatch();
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
 
@@ -34,13 +38,16 @@ const InnerComments = ({
         feedback.comments.forEach((comment) => {
           if (comment.id === commentId) {
             const updatedReplies = comment.replies.filter(
-              (reply) => reply.content !== content
+              (reply) => reply.id !== index
             );
             comment.replies = updatedReplies;
           }
         });
       }
     });
+
+    localStorage.setItem("data", JSON.stringify(data));
+    dispatch(updateData(data));
 
     console.log(data);
   };
