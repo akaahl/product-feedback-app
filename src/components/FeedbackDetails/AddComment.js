@@ -6,11 +6,16 @@ import { updateData } from "../../actions/dataActions";
 const AddComment = ({ feedbackId }) => {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
+  const [error, setError] = useState(false);
 
   const handleComment = (e) => {
     setComment((comment) => e.target.value);
 
     if (comment.length >= 250) setComment((comment) => comment.slice(0, 250));
+  };
+
+  const handleNoInput = () => {
+    return !comment ? setError(true) : setError(false);
   };
 
   const handleAddComment = (e) => {
@@ -39,10 +44,12 @@ const AddComment = ({ feedbackId }) => {
 
       <form>
         <textarea
+          className={error ? "error" : null}
           name="addComment"
           placeholder="Type your comment here"
           value={comment}
           onChange={handleComment}
+          onBlur={handleNoInput}
         ></textarea>
 
         <div className="addComment__submit">
@@ -79,7 +86,7 @@ const StyledAddComment = styled.div`
     flex-direction: column;
 
     textarea {
-      border: none;
+      border: 1px solid transparent;
       background-color: #f7f8fd;
       border-radius: 5px;
       height: 150px;
@@ -88,7 +95,11 @@ const StyledAddComment = styled.div`
       padding: 15px;
       color: #647196;
       font-size: 17px;
-      transition: all 0.3s ease-in;
+      transition: border 0.2s ease-in;
+
+      &.error {
+        border: 1px solid orangered;
+      }
 
       &::placeholder {
         color: #647196;
@@ -98,7 +109,6 @@ const StyledAddComment = styled.div`
 
       &:focus {
         border: 1px solid #4661e6;
-        /* transition: border 0.3s ease-in; */
       }
     }
 

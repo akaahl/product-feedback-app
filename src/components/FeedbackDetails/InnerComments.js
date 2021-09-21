@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 
@@ -16,8 +15,9 @@ const InnerComments = ({
   addInnerReplies,
 }) => {
   const dispatch = useDispatch();
+  const [formFocus, setFormFocus] = useState(false);
   const [textArea, setTextArea] = useState("");
-  const [reply, setReply] = useState(false);
+  const [innerReply, setInnerReply] = useState(false);
 
   const handleChange = (e) => {
     setTextArea((text) => e.target.value);
@@ -25,7 +25,7 @@ const InnerComments = ({
 
   const handleReply = (e) => {
     e.preventDefault();
-    setReply((reply) => !reply);
+    setInnerReply((reply) => !reply);
   };
 
   const deleteInnerReply = () => {
@@ -79,13 +79,21 @@ const InnerComments = ({
             </div>
           ) : null}
 
-          {reply && (
-            <form className="feedback__content-bottom-reply">
+          {innerReply && (
+            <form
+              className={
+                formFocus
+                  ? "feedback__content-bottom-reply active"
+                  : "feedback__content-bottom-reply"
+              }
+            >
               <textarea
                 name="replyComment"
                 placeholder={`Replying to @${username}`}
                 value={textArea}
                 onChange={handleChange}
+                onFocus={() => setFormFocus(true)}
+                onBlur={() => setFormFocus(false)}
               ></textarea>
 
               <button
@@ -94,7 +102,7 @@ const InnerComments = ({
                   e.preventDefault();
                   addInnerReplies(textArea, username, feedbackId, commentId);
                   setTextArea((text) => "");
-                  setReply((reply) => false);
+                  setInnerReply((reply) => false);
                 }}
               >
                 <Icon

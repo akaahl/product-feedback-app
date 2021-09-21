@@ -18,6 +18,7 @@ const Comments = ({
   const dispatch = useDispatch();
   const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
+  const [formFocus, setFormFocus] = useState(false);
 
   const handleChange = (e) => {
     setTextArea((text) => e.target.value);
@@ -98,12 +99,20 @@ const Comments = ({
           <p>{content}</p>
 
           {reply && (
-            <form className="feedback__content-bottom-reply">
+            <form
+              className={
+                formFocus
+                  ? "feedback__content-bottom-reply active"
+                  : "feedback__content-bottom-reply"
+              }
+            >
               <textarea
                 name="replyComment"
                 placeholder={`Replying to @${username}`}
                 value={textArea}
                 onChange={handleChange}
+                onFocus={() => setFormFocus(true)}
+                onBlur={() => setFormFocus(false)}
               ></textarea>
 
               <button
@@ -134,10 +143,7 @@ const Comments = ({
 
         {replies &&
           replies.map(
-            (
-              { content, replyingTo, user: { image, name, username } },
-              index
-            ) => (
+            ({ content, replyingTo, user: { image, name, username } }) => (
               <InnerComments
                 key={uuidv4()}
                 content={content}
@@ -248,15 +254,22 @@ const StyledComments = styled.div`
 
       .feedback__content-bottom-reply {
         margin-top: 15px;
+        border: 1px solid transparent;
         border-radius: 10px;
         background-color: #f7f8fd;
         display: flex;
         padding: 15px;
+        transition: border 0.2s ease-in-out;
+
+        &.active {
+          border: 1px solid #4661e6;
+          outline: none;
+        }
 
         textarea {
           flex: 1;
           height: 110px;
-          border: none;
+          border: 1px solid transparent;
           background-color: #f7f8fd;
           resize: none;
           font-size: 17px;
