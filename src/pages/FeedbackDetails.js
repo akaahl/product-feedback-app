@@ -24,6 +24,10 @@ const FeedbackDetails = () => {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
     dispatch(updateData(data));
+
+    window.scrollTo({
+      top: 0,
+    });
   }, [dispatch]);
 
   const handleBackBtn = (e) => {
