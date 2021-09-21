@@ -98,6 +98,7 @@ const InnerComments = ({
 
               <button
                 className={textArea ? "" : "disabled"}
+                disabled={!textArea ? true : false}
                 onClick={(e) => {
                   e.preventDefault();
                   addInnerReplies(textArea, username, feedbackId, commentId);

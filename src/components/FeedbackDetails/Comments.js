@@ -117,6 +117,7 @@ const Comments = ({
 
               <button
                 className={textArea ? "" : "disabled"}
+                disabled={!textArea ? true : false}
                 onClick={(e) => {
                   e.preventDefault();
                   addInnerReplies(textArea, username, feedbackId, commentId);
@@ -231,6 +232,9 @@ const StyledComments = styled.div`
         display: flex;
 
         button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin: 0 0 0 auto;
           background: none;
           border: none;
@@ -287,9 +291,11 @@ const StyledComments = styled.div`
         }
 
         button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           background: none;
           border: none;
-          outline: none;
           align-self: flex-end;
           cursor: pointer;
 
