@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
@@ -7,15 +7,24 @@ import AddComment from "../components/FeedbackDetails/AddComment";
 import { useParams, useHistory } from "react-router-dom";
 import { totalComments } from "../utils/utilityFunctions";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateData } from "../actions/dataActions";
 
 const FeedbackDetails = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const feedbackId = id;
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state.data) || null;
+  // const data = JSON.parse(localStorage.getItem("data"));
   const productRequests = data.productRequests;
   const feedback = productRequests.filter((item) => item.id === +id)[0];
   const { title, category, upvotes, description, comments } = feedback;
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("data"));
+    dispatch(updateData(data));
+  }, [dispatch]);
 
   const handleBackBtn = (e) => {
     e.preventDefault();

@@ -7,14 +7,12 @@ import { updateData } from "../../actions/dataActions";
 
 const InnerComments = ({
   content,
-  index,
   replyingTo,
   imageUrl,
   name,
   username,
   feedbackId,
   commentId,
-  innerCommentId,
   addInnerReplies,
 }) => {
   const dispatch = useDispatch();
@@ -38,7 +36,9 @@ const InnerComments = ({
         feedback.comments.forEach((comment) => {
           if (comment.id === commentId) {
             const updatedReplies = comment.replies.filter(
-              (reply) => reply.id !== index
+              (reply) =>
+                reply.content + reply.replyingTo + reply.user.name !==
+                content + replyingTo + name
             );
             comment.replies = updatedReplies;
           }
@@ -48,8 +48,6 @@ const InnerComments = ({
 
     localStorage.setItem("data", JSON.stringify(data));
     dispatch(updateData(data));
-
-    console.log(data);
   };
 
   return (

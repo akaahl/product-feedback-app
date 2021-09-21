@@ -58,12 +58,7 @@ const Comments = ({
       if (feedback.id === feedbackId) {
         feedback.comments.forEach((comment) => {
           if (comment.id === commentId) {
-            const generateId = (arr) => {
-              return !arr.length ? 0 : arr.length;
-            };
-
             const innerReply = {
-              id: generateId(comment.replies),
               content: text,
               replyingTo: user,
               user: currentUser,
@@ -145,8 +140,6 @@ const Comments = ({
             ) => (
               <InnerComments
                 key={uuidv4()}
-                index={index}
-                innerCommentId={uuidv4()}
                 content={content}
                 replyingTo={replyingTo}
                 imageUrl={image}
