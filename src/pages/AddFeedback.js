@@ -34,6 +34,17 @@ const AddFeedback = () => {
     details: "",
   });
 
+  useEffect(() => {
+    if (id)
+      setFormData((form) => ({
+        ...form,
+        title: feedback.title,
+        category:
+          feedback.category[0].toUpperCase() + feedback.category.substring(1),
+        details: feedback.description,
+      }));
+  }, [id, feedback.title, feedback.category, feedback.description]);
+
   const handleError = (e) => {
     const name = e.target.name;
 
@@ -116,7 +127,7 @@ const AddFeedback = () => {
           className={id ? "feedback__icon edit" : "feedback__icon add"}
         ></div>
 
-        <h1>{id ? `Editing '${feedback.title}'` : "Create A New Feedback"}</h1>
+        <h1>{id ? `Editing '${formData.title}'` : "Create A New Feedback"}</h1>
 
         <form>
           <label htmlFor="title" name="title">
@@ -146,6 +157,7 @@ const AddFeedback = () => {
             formData={formData}
             setFormData={setFormData}
             arrowLeftIcon={arrowLeftIcon}
+            paramsId={id}
           />
 
           <label htmlFor="details">Feedback Details</label>
