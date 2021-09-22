@@ -24,7 +24,7 @@ function App() {
             <AddFeedback />
           </Route>
 
-          <Route path="/add-feedback/:id">
+          <Route exact path="/edit-feedback/:id">
             <AddFeedback />
           </Route>
 

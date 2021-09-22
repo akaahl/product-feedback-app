@@ -37,7 +37,7 @@ const FeedbackDetails = () => {
 
   const handleEditFeedback = (e) => {
     e.preventDefault();
-    history.push(`/add-feedback/${feedbackId}`);
+    history.push(`/edit-feedback/${feedbackId}`);
   };
 
   return (
