@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import checkIcon from "../../assets/shared/icon-check.svg";
 
 const SelectDropdown = ({
@@ -7,10 +7,12 @@ const SelectDropdown = ({
   formData,
   setFormData,
   arrowLeftIcon,
+  paramsId,
 }) => {
   const [buttonId, setButtonId] = useState("0");
   const [dropdown, setDropdown] = useState(false);
   const dropDownRef = useRef();
+  const categoryRef = useRef();
 
   const handleKeyPress = (e) => {
     if (e.charCode === 13) setDropdown(!dropdown);
@@ -28,7 +30,7 @@ const SelectDropdown = ({
     document.addEventListener("click", closeDropdown);
   };
 
-  const showArrow = (id) => {
+  const showArrow = (id, paramsId) => {
     return buttonId === id ? <img src={checkIcon} alt="check" /> : null;
   };
 
@@ -64,6 +66,13 @@ const SelectDropdown = ({
 
     if (key === 13) {
       manageCategory();
+    }
+  };
+
+  const clickCategory = (category) => {
+    if (category === "Feature") {
+      console.log(categoryRef);
+      categoryRef.current.click();
     }
   };
 
@@ -106,8 +115,9 @@ const SelectDropdown = ({
             id="1"
             onClick={handleCategory}
             onKeyPress={handleCategory}
+            ref={categoryRef}
           >
-            UI {showArrow("1")}
+            UI {showArrow("1", paramsId)}
           </span>
           <span
             name="category-option"
@@ -117,7 +127,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            UX {showArrow("2")}
+            UX {showArrow("2", paramsId)}
           </span>
           <span
             name="category-option"
@@ -127,7 +137,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Enhancement {showArrow("3")}
+            Enhancement {showArrow("3", paramsId)}
           </span>
           <span
             name="category-option"
@@ -137,7 +147,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Bug {showArrow("4")}
+            Bug {showArrow("4", paramsId)}
           </span>
           <span
             name="category-option"
@@ -147,7 +157,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Feature {showArrow("5")}
+            Feature {showArrow("5", paramsId)}
           </span>
         </div>
       )}{" "}

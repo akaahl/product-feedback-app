@@ -20,8 +20,6 @@ const AddFeedback = () => {
     (feedback) => feedback.id === +id
   )[0];
 
-  console.log(feedback);
-
   const [errorStatus, setErrorStatus] = useState({
     title: false,
     category: false,
