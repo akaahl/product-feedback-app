@@ -24,6 +24,10 @@ function App() {
             <AddFeedback />
           </Route>
 
+          <Route path="/add-feedback/:id">
+            <AddFeedback />
+          </Route>
+
           <Route exact path="/feedback/:id">
             <FeedbackDetails />
           </Route>

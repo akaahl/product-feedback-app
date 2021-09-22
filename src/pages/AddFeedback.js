@@ -3,6 +3,8 @@ import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import gradientBackground from "../assets/suggestions/desktop/background-header.png";
 import plusIcon from "../assets/shared/icon-plus.svg";
+import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
+import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
 import { useHistory } from "react-router";
 import SelectDropdown from "../components/AddFeedback/SelectDropdown";
 import { useDispatch } from "react-redux";
@@ -11,6 +13,8 @@ import { updateData } from "../actions/dataActions";
 const AddFeedback = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const [edit, setEdit] = useState(false);
 
   const [errorStatus, setErrorStatus] = useState({
     title: false,
@@ -102,9 +106,9 @@ const AddFeedback = () => {
       </nav>
 
       <main>
-        <div className="feedback__add-icon">
-          <img src={plusIcon} alt="plus" />
-        </div>
+        <div
+          className={edit ? "feedback__icon edit" : "feedback__icon add"}
+        ></div>
 
         <h1>Create A New Feedback</h1>
 
@@ -212,23 +216,25 @@ const StyledContainer = styled.div`
     border-radius: 10px;
     padding: 15px 30px;
 
-    .feedback__add-icon {
+    .feedback__icon {
       position: absolute;
       top: -27px;
       left: 30px;
       height: 55px;
       width: 55px;
       border-radius: 50%;
-      background-image: url(${gradientBackground});
       background-size: 100% 100%;
       background-repeat: no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      img {
-        height: 15px;
-        width: 15px;
+      &.add {
+        background-image: url(${newFeedbackIcon});
+      }
+
+      &.edit {
+        background-image: url(${editFeedbackIcon});
       }
     }
 

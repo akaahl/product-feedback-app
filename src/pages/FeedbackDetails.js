@@ -35,6 +35,11 @@ const FeedbackDetails = () => {
     history.push("/");
   };
 
+  const handleEditFeedback = (e) => {
+    e.preventDefault();
+    history.push(`/add-feedback/${feedbackId}`);
+  };
+
   return (
     <StyledFeedback>
       <nav className="feedback__nav">
@@ -43,7 +48,9 @@ const FeedbackDetails = () => {
           Go Back
         </button>
 
-        <button className="feedback__nav-edit-btn">Edit Feedback</button>
+        <button className="feedback__nav-edit-btn" onClick={handleEditFeedback}>
+          Edit Feedback
+        </button>
       </nav>
 
       <Feedback

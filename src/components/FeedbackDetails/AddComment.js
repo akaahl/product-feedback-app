@@ -21,7 +21,10 @@ const AddComment = ({ feedbackId }) => {
   const handleAddComment = (e) => {
     e.preventDefault();
 
-    if (!comment) return;
+    if (!comment) {
+      setError(true);
+      return;
+    }
 
     const user = JSON.parse(localStorage.getItem("data")).currentUser;
 
@@ -33,8 +36,6 @@ const AddComment = ({ feedbackId }) => {
           : 0;
         const userComment = { id: commentId, content: comment, user };
         feedback.comments.push(userComment);
-        console.log(feedback.id === feedbackId);
-        console.log(typeof commentId);
       }
       return null;
     });
@@ -42,6 +43,7 @@ const AddComment = ({ feedbackId }) => {
     localStorage.setItem("data", JSON.stringify(data));
     dispatch(updateData(data));
     setComment((comment) => "");
+    setError(false);
   };
 
   return (
