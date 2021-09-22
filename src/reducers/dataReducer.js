@@ -21,12 +21,6 @@ const dataReducer = (state = initialState, action) => {
         category: action.payload.category,
       };
 
-    // case "FILTER_SELECTIONS":
-    //   return {
-    //     ...state,
-    //     selections: action.payload.filteredSuggestions,
-    //   };
-
     case "UPDATE_DATA":
       return {
         ...state,

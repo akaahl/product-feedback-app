@@ -20,15 +20,21 @@ const AddComment = ({ feedbackId }) => {
 
   const handleAddComment = (e) => {
     e.preventDefault();
+
+    if (!comment) return;
+
     const user = JSON.parse(localStorage.getItem("data")).currentUser;
 
     const data = JSON.parse(localStorage.getItem("data"));
     data.productRequests.map((feedback) => {
       if (feedback.id === feedbackId) {
-        const commentId =
-          feedback.comments[feedback.comments.length - 1].id + 1;
+        const commentId = feedback.comments.length
+          ? feedback.comments[feedback.comments.length - 1].id + 1
+          : 0;
         const userComment = { id: commentId, content: comment, user };
         feedback.comments.push(userComment);
+        console.log(feedback.id === feedbackId);
+        console.log(typeof commentId);
       }
       return null;
     });
