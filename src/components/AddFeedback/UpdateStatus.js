@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import checkIcon from "../../assets/shared/icon-check.svg";
 
 const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
   const [dropdown, setDropdown] = useState(false);
   const [buttonId, setButtonId] = useState("0");
-  const [paramsCheckIcon, setParamsCheckIcon] = useState(false);
+  const [paramsCheckIcon, setParamsCheckIcon] = useState(true);
 
   const closeDropdown = () => {
     setDropdown(false);
@@ -27,6 +27,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
       setParamsCheckIcon(false);
       setButtonId(id);
       setStatus(status);
+      setDropdown(false);
     };
 
     manageStatus();
@@ -44,9 +45,11 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
     ) : null;
   };
 
-  useEffect(() => {
-    if (paramsId) setParamsCheckIcon(true);
-  }, [paramsId]);
+  //   useEffect(() => {
+  //     if (paramsId) setParamsCheckIcon(true);
+
+  //       setParamsCheckIcon(false);
+  //   }, [paramsId]);
 
   return (
     <>
@@ -60,6 +63,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
         role="button"
         name="updateStatus"
         onClick={handleClick}
+        onKeyPress={handleClick}
       >
         {status}
         <img
@@ -77,6 +81,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
             role="button"
             id="1"
             onClick={handleUpdateStatus}
+            onKeyPress={handleUpdateStatus}
           >
             Suggestion {showCheckIcon("1")}{" "}
             {paramsCheckIcon && showParamsCheck("suggestion")}
@@ -87,6 +92,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
             role="button"
             id="2"
             onClick={handleUpdateStatus}
+            onKeyPress={handleUpdateStatus}
           >
             Planned {showCheckIcon("2")}{" "}
             {paramsCheckIcon && showParamsCheck("planned")}
@@ -97,6 +103,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
             role="button"
             id="3"
             onClick={handleUpdateStatus}
+            onKeyPress={handleUpdateStatus}
           >
             In-Progess {showCheckIcon("3")}{" "}
             {paramsCheckIcon && showParamsCheck("in-progress")}
@@ -107,6 +114,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
             role="button"
             id="4"
             onClick={handleUpdateStatus}
+            onKeyPress={handleUpdateStatus}
           >
             Live {showCheckIcon("4")}{" "}
             {paramsCheckIcon && showParamsCheck("live")}

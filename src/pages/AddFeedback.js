@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
 import { useParams } from "react-router-dom";
 import UpdateStatus from "../components/AddFeedback/UpdateStatus";
+import HandleButtons from "../components/AddFeedback/HandleButtons";
 
 const AddFeedback = () => {
   const history = useHistory();
@@ -200,18 +201,22 @@ const AddFeedback = () => {
             Field cannot be empty
           </small>
 
-          <div className="feedback__submit-cancel-buttons">
-            <button className="feedback__cancel-btn" onClick={handleCancel}>
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="feedback__submit-btn"
-              onClick={handleSubmit}
-            >
-              Add Feedback
-            </button>
-          </div>
+          {id ? (
+            <HandleButtons paramsId={id} />
+          ) : (
+            <div className="feedback__submit-cancel-buttons">
+              <button className="feedback__cancel-btn" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="feedback__submit-btn"
+                onClick={handleSubmit}
+              >
+                Add Feedback
+              </button>
+            </div>
+          )}
         </form>
       </main>
     </StyledContainer>
