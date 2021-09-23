@@ -15,6 +15,8 @@ const AddFeedback = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const [status, setStatus] = useState("");
+
   const [errorStatus, setErrorStatus] = useState({
     title: false,
     category: false,
@@ -33,6 +35,10 @@ const AddFeedback = () => {
       const feedback = data.productRequests.filter(
         (feedback) => feedback.id === +id
       )[0];
+
+      setStatus(
+        feedback.status[0].toUpperCase() + feedback.status.substring(1)
+      );
 
       setFormData((form) => ({
         ...form,
@@ -161,7 +167,14 @@ const AddFeedback = () => {
             paramsId={id}
           />
 
-          {id && <UpdateStatus arrowLeftIcon={arrowLeftIcon} />}
+          {id && (
+            <UpdateStatus
+              arrowLeftIcon={arrowLeftIcon}
+              status={status}
+              setStatus={setStatus}
+              paramsId={id}
+            />
+          )}
 
           <label htmlFor="details">Feedback Details</label>
           <span>

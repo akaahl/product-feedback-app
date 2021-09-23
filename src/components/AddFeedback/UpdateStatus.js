@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import checkIcon from "../../assets/shared/icon-check.svg";
 
-const UpdateStatus = ({ arrowLeftIcon }) => {
+const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
   const [dropdown, setDropdown] = useState(false);
   const [buttonId, setButtonId] = useState("0");
+  const [paramsCheckIcon, setParamsCheckIcon] = useState(false);
 
   const closeDropdown = () => {
     setDropdown(false);
@@ -21,10 +22,11 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
     const key = e.charCode;
     const id = e.target.id;
     const status = e.target.textContent.trim();
-    console.log(typeof id);
 
     const manageStatus = () => {
+      setParamsCheckIcon(false);
       setButtonId(id);
+      setStatus(status);
     };
 
     manageStatus();
@@ -34,9 +36,17 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
 
   const showCheckIcon = (id) => {
     return buttonId === id ? <img src={checkIcon} alt="check" /> : null;
-    // console.log(buttonId);
-    // console.log(id);
   };
+
+  const showParamsCheck = (updateStatus) => {
+    return status.toLowerCase() === updateStatus.toLowerCase() ? (
+      <img src={checkIcon} alt="check" />
+    ) : null;
+  };
+
+  useEffect(() => {
+    if (paramsId) setParamsCheckIcon(true);
+  }, [paramsId]);
 
   return (
     <>
@@ -51,6 +61,7 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
         name="updateStatus"
         onClick={handleClick}
       >
+        {status}
         <img
           src={arrowLeftIcon}
           alt="arrow"
@@ -67,7 +78,8 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
             id="1"
             onClick={handleUpdateStatus}
           >
-            Suggestion {showCheckIcon("1")}
+            Suggestion {showCheckIcon("1")}{" "}
+            {paramsCheckIcon && showParamsCheck("suggestion")}
           </span>
           <span
             name="updateStatus-option"
@@ -76,7 +88,8 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
             id="2"
             onClick={handleUpdateStatus}
           >
-            Planned {showCheckIcon("2")}
+            Planned {showCheckIcon("2")}{" "}
+            {paramsCheckIcon && showParamsCheck("planned")}
           </span>
           <span
             name="updateStatus-option"
@@ -85,7 +98,8 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
             id="3"
             onClick={handleUpdateStatus}
           >
-            In-Progess {showCheckIcon("3")}
+            In-Progess {showCheckIcon("3")}{" "}
+            {paramsCheckIcon && showParamsCheck("in-progress")}
           </span>
           <span
             name="updateStatus-option"
@@ -94,7 +108,8 @@ const UpdateStatus = ({ arrowLeftIcon }) => {
             id="4"
             onClick={handleUpdateStatus}
           >
-            Live {showCheckIcon("4")}
+            Live {showCheckIcon("4")}{" "}
+            {paramsCheckIcon && showParamsCheck("live")}
           </span>
         </div>
       )}
