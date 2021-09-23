@@ -378,6 +378,10 @@ const StyledContainer = styled.div`
         width: 100%;
         z-index: 10;
 
+        &.updateStatus {
+          top: 445px;
+        }
+
         span {
           font-size: 16px;
           /* margin: 5px; */

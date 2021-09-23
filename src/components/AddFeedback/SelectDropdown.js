@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import checkIcon from "../../assets/shared/icon-check.svg";
 
 const SelectDropdown = ({
@@ -12,7 +12,6 @@ const SelectDropdown = ({
   const [buttonId, setButtonId] = useState("0");
   const [dropdown, setDropdown] = useState(false);
   const [paramsCheckIcon, setParamsCheckIcon] = useState(false);
-  const dropDownRef = useRef();
 
   const handleKeyPress = (e) => {
     if (e.charCode === 13) setDropdown(!dropdown);
@@ -113,7 +112,7 @@ const SelectDropdown = ({
         Field cannot be empty
       </small>
       {dropdown && (
-        <div className="feedback__input-options" ref={dropDownRef}>
+        <div className="feedback__input-options">
           <span
             name="category-option"
             tabIndex="0"
@@ -122,8 +121,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            UI {showArrow("1", paramsId)}{" "}
-            {paramsCheckIcon && showParamsCheck("ui")}
+            UI {showArrow("1")} {paramsCheckIcon && showParamsCheck("ui")}
           </span>
           <span
             name="category-option"
@@ -133,8 +131,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            UX {showArrow("2", paramsId)}{" "}
-            {paramsCheckIcon && showParamsCheck("ux")}
+            UX {showArrow("2")} {paramsCheckIcon && showParamsCheck("ux")}
           </span>
           <span
             name="category-option"
@@ -144,7 +141,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Enhancement {showArrow("3", paramsId)}{" "}
+            Enhancement {showArrow("3")}{" "}
             {paramsCheckIcon && showParamsCheck("enhancement")}
           </span>
           <span
@@ -155,8 +152,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Bug {showArrow("4", paramsId)}{" "}
-            {paramsCheckIcon && showParamsCheck("bug")}
+            Bug {showArrow("4")} {paramsCheckIcon && showParamsCheck("bug")}
           </span>
           <span
             name="category-option"
@@ -166,7 +162,7 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Feature {showArrow("5", paramsId)}{" "}
+            Feature {showArrow("5")}{" "}
             {paramsCheckIcon && showParamsCheck("feature")}
           </span>
         </div>
