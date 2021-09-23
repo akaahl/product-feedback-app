@@ -31,6 +31,7 @@ const AddFeedback = () => {
   });
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     if (id) {
       const data = JSON.parse(localStorage.getItem("data"));
       const feedback = data.productRequests.filter(
@@ -201,7 +202,12 @@ const AddFeedback = () => {
           </small>
 
           {id ? (
-            <HandleButtons paramsId={id} formData={formData} status={status} setErrorStatus={setErrorStatus}/>
+            <HandleButtons
+              paramsId={id}
+              formData={formData}
+              status={status}
+              setErrorStatus={setErrorStatus}
+            />
           ) : (
             <div className="feedback__submit-cancel-buttons">
               <button className="feedback__cancel-btn" onClick={handleCancel}>

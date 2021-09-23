@@ -21,7 +21,7 @@ const Main = () => {
     <StyledMain>
       <div className="main__planned">
         <div className="main__header">
-          <p className="main__header_category">Planned (2)</p>
+          <p className="main__header_category">Planned ({planned.length})</p>
           <p>Ideas prioritized for research</p>
         </div>
 
@@ -52,7 +52,9 @@ const Main = () => {
 
       <div className="main__in-progress">
         <div className="main__header">
-          <p className="main__header_category">In Progress (3)</p>
+          <p className="main__header_category">
+            In Progress ({inProgress.length})
+          </p>
           <p>Currently being developed</p>
         </div>
 
@@ -83,7 +85,7 @@ const Main = () => {
 
       <div className="main__live">
         <div className="main__header">
-          <p className="main__header_category">Live (1)</p>
+          <p className="main__header_category">Live ({live.length})</p>
           <p>Released features</p>
         </div>
 

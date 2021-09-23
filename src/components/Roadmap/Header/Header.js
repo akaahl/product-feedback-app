@@ -17,7 +17,7 @@ const Header = () => {
       </div>
 
       <div className="header__right-side">
-        <button>
+        <button onClick={() => history.push("/add-feedback")}>
           <img src={plusIcon} alt="plus" /> Add Feedback
         </button>
       </div>

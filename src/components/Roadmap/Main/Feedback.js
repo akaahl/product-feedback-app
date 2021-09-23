@@ -3,6 +3,7 @@ import styled from "styled-components";
 import commentsIcon from "../../../assets/shared/icon-comments.svg";
 import { totalComments } from "../../../utils/utilityFunctions";
 import UpvoteButton from "../../Home/Main/UpvoteButton";
+import { useHistory } from "react-router-dom";
 
 const Feedback = ({
   upvotes,
@@ -13,6 +14,8 @@ const Feedback = ({
   category,
   status,
 }) => {
+  const history = useHistory();
+
   return (
     <StyledFeedback
       className={
@@ -22,6 +25,7 @@ const Feedback = ({
           ? "in-progress"
           : "live"
       }
+      onClick={() => history.push(`/edit-feedback/${id}`)}
     >
       <div className="section__status">
         <div className="section__status-circle"></div>
@@ -61,7 +65,7 @@ const StyledFeedback = styled.section`
   background-color: #ffffff;
   padding: 20px 25px 28px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 
   &:hover {
     transform: scale(1.02);

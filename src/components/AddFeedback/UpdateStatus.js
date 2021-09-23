@@ -45,12 +45,6 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
     ) : null;
   };
 
-  //   useEffect(() => {
-  //     if (paramsId) setParamsCheckIcon(true);
-
-  //       setParamsCheckIcon(false);
-  //   }, [paramsId]);
-
   return (
     <>
       <label htmlFor="updateStatus">Update Status</label>
