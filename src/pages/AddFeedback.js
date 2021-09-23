@@ -8,6 +8,7 @@ import SelectDropdown from "../components/AddFeedback/SelectDropdown";
 import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
 import { useParams } from "react-router-dom";
+import UpdateStatus from "../components/AddFeedback/UpdateStatus";
 
 const AddFeedback = () => {
   const history = useHistory();
@@ -160,6 +161,8 @@ const AddFeedback = () => {
             paramsId={id}
           />
 
+          {id && <UpdateStatus arrowLeftIcon={arrowLeftIcon} />}
+
           <label htmlFor="details">Feedback Details</label>
           <span>
             Include any specific comments on what should be improved, added, etc
@@ -295,7 +298,8 @@ const StyledContainer = styled.div`
           border: 1px solid #4661e6;
         }
 
-        &.feedback__input-category {
+        &.feedback__input-category,
+        &.feedback__input-updateStatus {
           caret-color: transparent;
           cursor: pointer;
           position: relative;
