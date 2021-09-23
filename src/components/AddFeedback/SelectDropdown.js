@@ -11,6 +11,7 @@ const SelectDropdown = ({
 }) => {
   const [buttonId, setButtonId] = useState("0");
   const [dropdown, setDropdown] = useState(false);
+  const [paramsCheckIcon, setParamsCheckIcon] = useState(false);
   const dropDownRef = useRef();
   const categoryRef = useRef();
 
@@ -51,6 +52,7 @@ const SelectDropdown = ({
     const category = e.target.textContent.trim();
 
     const manageCategory = () => {
+      setParamsCheckIcon(false);
       setButtonId(id);
       setFormData({
         ...formData,
@@ -69,12 +71,21 @@ const SelectDropdown = ({
     }
   };
 
-  const clickCategory = (category) => {
-    if (category === "Feature") {
-      console.log(categoryRef);
-      categoryRef.current.click();
-    }
+  const showParamsCheck = (category) => {
+    // console.log(category);
+    // console.log(formData.category);
+
+    return category === formData.category.toLowerCase() ? (
+      <img src={checkIcon} alt="check" />
+    ) : null;
   };
+
+  useEffect(() => {
+    if (paramsId) {
+      setParamsCheckIcon(true);
+      console.log("params exist");
+    }
+  }, [paramsId]);
 
   return (
     <>
@@ -117,7 +128,8 @@ const SelectDropdown = ({
             onKeyPress={handleCategory}
             ref={categoryRef}
           >
-            UI {showArrow("1", paramsId)}
+            UI {showArrow("1", paramsId)}{" "}
+            {paramsCheckIcon && showParamsCheck("ui")}
           </span>
           <span
             name="category-option"
@@ -127,7 +139,8 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            UX {showArrow("2", paramsId)}
+            UX {showArrow("2", paramsId)}{" "}
+            {paramsCheckIcon && showParamsCheck("ux")}
           </span>
           <span
             name="category-option"
@@ -137,7 +150,8 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Enhancement {showArrow("3", paramsId)}
+            Enhancement {showArrow("3", paramsId)}{" "}
+            {paramsCheckIcon && showParamsCheck("enhancement")}
           </span>
           <span
             name="category-option"
@@ -147,7 +161,8 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Bug {showArrow("4", paramsId)}
+            Bug {showArrow("4", paramsId)}{" "}
+            {paramsCheckIcon && showParamsCheck("bug")}
           </span>
           <span
             name="category-option"
@@ -157,7 +172,8 @@ const SelectDropdown = ({
             onClick={handleCategory}
             onKeyPress={handleCategory}
           >
-            Feature {showArrow("5", paramsId)}
+            Feature {showArrow("5", paramsId)}{" "}
+            {paramsCheckIcon && showParamsCheck("feature")}
           </span>
         </div>
       )}{" "}

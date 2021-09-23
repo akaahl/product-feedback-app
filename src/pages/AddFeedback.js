@@ -41,6 +41,8 @@ const AddFeedback = () => {
           feedback.category[0].toUpperCase() + feedback.category.substring(1),
         details: feedback.description,
       }));
+
+    return null;
   }, [id, feedback.title, feedback.category, feedback.description]);
 
   const handleError = (e) => {
