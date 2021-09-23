@@ -13,7 +13,6 @@ const SelectDropdown = ({
   const [dropdown, setDropdown] = useState(false);
   const [paramsCheckIcon, setParamsCheckIcon] = useState(false);
   const dropDownRef = useRef();
-  const categoryRef = useRef();
 
   const handleKeyPress = (e) => {
     if (e.charCode === 13) setDropdown(!dropdown);
@@ -31,7 +30,7 @@ const SelectDropdown = ({
     document.addEventListener("click", closeDropdown);
   };
 
-  const showArrow = (id, paramsId) => {
+  const showArrow = (id) => {
     return buttonId === id ? <img src={checkIcon} alt="check" /> : null;
   };
 
@@ -72,9 +71,6 @@ const SelectDropdown = ({
   };
 
   const showParamsCheck = (category) => {
-    // console.log(category);
-    // console.log(formData.category);
-
     return category === formData.category.toLowerCase() ? (
       <img src={checkIcon} alt="check" />
     ) : null;
@@ -83,7 +79,6 @@ const SelectDropdown = ({
   useEffect(() => {
     if (paramsId) {
       setParamsCheckIcon(true);
-      console.log("params exist");
     }
   }, [paramsId]);
 
@@ -126,7 +121,6 @@ const SelectDropdown = ({
             id="1"
             onClick={handleCategory}
             onKeyPress={handleCategory}
-            ref={categoryRef}
           >
             UI {showArrow("1", paramsId)}{" "}
             {paramsCheckIcon && showParamsCheck("ui")}

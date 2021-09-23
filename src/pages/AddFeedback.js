@@ -8,17 +8,11 @@ import SelectDropdown from "../components/AddFeedback/SelectDropdown";
 import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const AddFeedback = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  const data = JSON.parse(localStorage.getItem("data"));
-  const feedback = data.productRequests.filter(
-    (feedback) => feedback.id === +id
-  )[0];
 
   const [errorStatus, setErrorStatus] = useState({
     title: false,
@@ -33,7 +27,12 @@ const AddFeedback = () => {
   });
 
   useEffect(() => {
-    if (id)
+    if (id) {
+      const data = JSON.parse(localStorage.getItem("data"));
+      const feedback = data.productRequests.filter(
+        (feedback) => feedback.id === +id
+      )[0];
+
       setFormData((form) => ({
         ...form,
         title: feedback.title,
@@ -41,9 +40,10 @@ const AddFeedback = () => {
           feedback.category[0].toUpperCase() + feedback.category.substring(1),
         details: feedback.description,
       }));
+    }
 
     return null;
-  }, [id, feedback.title, feedback.category, feedback.description]);
+  }, [id]);
 
   const handleError = (e) => {
     const name = e.target.name;
