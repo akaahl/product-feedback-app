@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 
-const HandleButtons = ({ paramsId }) => {
+const HandleButtons = ({ paramsId, formData, status, setErrorStatus }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -24,8 +24,44 @@ const HandleButtons = ({ paramsId }) => {
     localStorage.setItem("data", JSON.stringify(updatedData));
     dispatch(updateData(updatedData));
     history.push("/");
+  };
 
-    console.log(updatedData);
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    const keys = Object.keys(formData);
+    keys.forEach((key) => {
+      if (!formData[key]) {
+        setErrorStatus((err) => ({ ...err, [key]: true }));
+      }
+    });
+
+    const formArr = Object.entries(formData);
+    const filledForm = formArr.every((data) => data[1]);
+
+    if (filledForm && status) {
+      const data = JSON.parse(localStorage.getItem("data"));
+      const updatedFeedbacks = data.productRequests.map((feedback) =>
+        feedback.id === +paramsId
+          ? {
+              ...feedback,
+              category: formData.category,
+              description: formData.details,
+              title: formData.title,
+              status: status.toLowerCase(),
+            }
+          : feedback
+      );
+
+      const updatedData = {
+        ...data,
+        productRequests: updatedFeedbacks,
+      };
+
+      localStorage.setItem("data", JSON.stringify(updatedData));
+      dispatch(updateData(updatedData));
+      history.push("/");
+    }
   };
 
   return (
@@ -38,7 +74,7 @@ const HandleButtons = ({ paramsId }) => {
         <button className="cancel" onClick={handleCancel}>
           Cancel
         </button>
-        <button type="submit" className="save">
+        <button type="submit" className="save" onClick={handleSave}>
           Save Changes
         </button>
       </div>

@@ -90,7 +90,6 @@ const AddFeedback = () => {
     });
 
     const formArr = Object.entries(formData);
-
     const filledForm = formArr.every((data) => (data[1] !== "" ? true : false));
 
     if (filledForm) {
@@ -124,7 +123,7 @@ const AddFeedback = () => {
   return (
     <StyledContainer>
       <nav>
-        <button onClick={() => history.push("/")}>
+        <button onClick={() => history.goBack()}>
           <img src={arrowLeftIcon} alt="arrow left" />
           Go back
         </button>
@@ -202,7 +201,7 @@ const AddFeedback = () => {
           </small>
 
           {id ? (
-            <HandleButtons paramsId={id} />
+            <HandleButtons paramsId={id} formData={formData} status={status} setErrorStatus={setErrorStatus}/>
           ) : (
             <div className="feedback__submit-cancel-buttons">
               <button className="feedback__cancel-btn" onClick={handleCancel}>

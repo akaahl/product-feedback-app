@@ -105,7 +105,7 @@ const UpdateStatus = ({ arrowLeftIcon, status, setStatus, paramsId }) => {
             onClick={handleUpdateStatus}
             onKeyPress={handleUpdateStatus}
           >
-            In-Progess {showCheckIcon("3")}{" "}
+            In-Progress {showCheckIcon("3")}{" "}
             {paramsCheckIcon && showParamsCheck("in-progress")}
           </span>
           <span
