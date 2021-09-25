@@ -13,6 +13,7 @@ const Feedback = ({
   comments,
   category,
   preventRedirect,
+  feedbackId,
 }) => {
   const history = useHistory();
 
@@ -20,7 +21,10 @@ const Feedback = ({
     history.push(`/feedback/${id}`);
   };
   return (
-    <FeedbackContainer onClick={preventRedirect ? null : showFeedback}>
+    <FeedbackContainer
+      onClick={preventRedirect ? null : showFeedback}
+      hover={feedbackId}
+    >
       <UpvoteButton upvotes={upvotes} id={id} />
 
       <div className="feedback__content">
@@ -42,7 +46,7 @@ const Feedback = ({
 export default Feedback;
 
 const FeedbackContainer = styled.section`
-  cursor: pointer;
+  cursor: ${(props) => (!props.hover ? "pointer" : "default")};
   margin-top: 20px;
   padding: 20px;
   border-radius: 10px;
@@ -52,7 +56,7 @@ const FeedbackContainer = styled.section`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    transform: scale(1.02);
+    transform: ${(props) => (!props.hover ? `scale(1.02)` : `none`)};
   }
 
   button {

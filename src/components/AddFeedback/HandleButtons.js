@@ -61,6 +61,7 @@ const HandleButtons = ({ paramsId, formData, status, setErrorStatus }) => {
       localStorage.setItem("data", JSON.stringify(updatedData));
       dispatch(updateData(updatedData));
       history.push("/");
+      window.scrollTo({ top: 0 });
     }
   };
 

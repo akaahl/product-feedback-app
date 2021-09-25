@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
@@ -16,19 +16,21 @@ const FeedbackDetails = () => {
   const { id } = useParams();
   const feedbackId = id;
 
-  const data = useSelector((state) => state.data);
-  const productRequests = data.productRequests;
-  const feedback = productRequests.filter((item) => item.id === Number(id))[0];
-  const { title, category, upvotes, description, comments } = feedback;
-
   useEffect(() => {
     const storagedata = JSON.parse(localStorage.getItem("data"));
     dispatch(updateData(storagedata));
+
+    // console.log(data);
 
     window.scrollTo({
       top: 0,
     });
   }, [dispatch]);
+
+  const data = useSelector((state) => state.data);
+  const productRequests = data.productRequests;
+  const feedback = productRequests.filter((item) => item.id === Number(id))[0];
+  const { title, category, upvotes, description, comments } = feedback;
 
   const handleBackBtn = (e) => {
     e.preventDefault();
@@ -62,6 +64,7 @@ const FeedbackDetails = () => {
         category={category}
         preventRedirect={true}
         key={id}
+        feedbackId={feedbackId}
       />
 
       <section className="feedback__comments">

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Feedback from "./Feedback";
 
 const Main = () => {
-  const [planned, setPlanned] = useState();
-  const [inProgress, setInProgress] = useState();
-  const [live, setLive] = useState();
+  const [planned, setPlanned] = useState(null);
+  const [inProgress, setInProgress] = useState(null);
+  const [live, setLive] = useState(null);
 
   useEffect(() => {
     const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
@@ -21,7 +21,7 @@ const Main = () => {
     <StyledMain>
       <div className="main__planned">
         <div className="main__header">
-          <p className="main__header_category">Planned ({planned.length})</p>
+          <p className="main__header_category">Planned ({planned?.length})</p>
           <p>Ideas prioritized for research</p>
         </div>
 
@@ -53,7 +53,7 @@ const Main = () => {
       <div className="main__in-progress">
         <div className="main__header">
           <p className="main__header_category">
-            In Progress ({inProgress.length})
+            In Progress ({inProgress?.length})
           </p>
           <p>Currently being developed</p>
         </div>
@@ -85,7 +85,7 @@ const Main = () => {
 
       <div className="main__live">
         <div className="main__header">
-          <p className="main__header_category">Live ({live.length})</p>
+          <p className="main__header_category">Live ({live?.length})</p>
           <p>Released features</p>
         </div>
 
