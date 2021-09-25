@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import Feedback from "../components/Home/Main/Feedback";
@@ -19,8 +19,6 @@ const FeedbackDetails = () => {
   useEffect(() => {
     const storagedata = JSON.parse(localStorage.getItem("data"));
     dispatch(updateData(storagedata));
-
-    // console.log(data);
 
     window.scrollTo({
       top: 0,

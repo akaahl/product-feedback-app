@@ -292,4 +292,8 @@ const MainContainer = styled.main`
       }
     }
   }
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
 `;

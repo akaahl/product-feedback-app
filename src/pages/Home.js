@@ -32,4 +32,10 @@ const StyledContainer = styled.div`
   margin: 70px 0;
   width: 1100px;
   display: flex;
+
+  @media (max-width: 1024px) {
+    width: 750px;
+    flex-direction: column;
+    margin: 20px 0;
+  }
 `;

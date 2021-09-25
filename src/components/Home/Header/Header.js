@@ -285,4 +285,19 @@ const StyledHeader = styled.header`
       }
     }
   }
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .header__feedback-board,
+    .header__categories,
+    .header__roadmap {
+      margin-top: 0;
+      margin-bottom: 40px;
+      height: 190px;
+      flex: 0.3;
+    }
+  }
 `;
