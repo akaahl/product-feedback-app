@@ -38,4 +38,9 @@ const StyledContainer = styled.div`
     flex-direction: column;
     margin: 20px 0;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+  }
 `;

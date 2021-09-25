@@ -147,4 +147,38 @@ const FeedbackContainer = styled.section`
       font-weight: 600;
     }
   }
+
+  @media (max-width: 768px) {
+    display: grid;
+    margin: 20px 20px 0 20px;
+    grid-template-areas:
+      "content content content"
+      "content content content"
+      "upvote . comment";
+    padding: 30px;
+
+    &:first-child {
+      margin-top: 40px;
+    }
+
+    button {
+      grid-area: upvote;
+      flex-direction: row;
+
+      img {
+        margin-bottom: 0;
+        margin-right: 15px;
+      }
+    }
+
+    .feedback__content {
+      grid-area: content;
+      margin-left: 0;
+      margin-bottom: 20px;
+    }
+
+    .feedback__comments {
+      grid-area: comment;
+    }
+  }
 `;

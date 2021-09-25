@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-   
-
     * {
         margin: 0;
         padding: 0;
@@ -14,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
         
         background: #F2F4FF;
         font-family: 'Jost', sans-serif
+    }
+
+    @media (max-width: 768px) {
+        
     }
 `;
 

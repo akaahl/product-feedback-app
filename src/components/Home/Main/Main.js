@@ -141,7 +141,7 @@ const Main = () => {
           className="main__add-feedback"
           onClick={() => history.push("/add-feedback")}
         >
-          <img src={plusIcon} alt="icon" /> Add Feedback
+          <img src={plusIcon} alt="icon" /> <span>Add Feedback</span>
         </button>
       </div>
 
@@ -295,5 +295,55 @@ const MainContainer = styled.main`
 
   @media (max-width: 1024px) {
     margin-left: 0;
+  }
+
+  @media (max-width: 768px) {
+    .main__header {
+      border-radius: 0;
+
+      .main__header-suggestion {
+        display: none;
+      }
+
+      .main__header-sort {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    .main__header {
+      .main__header-sort {
+        p,
+        .header-select-options {
+          font-size: 90%;
+
+          .selections-container {
+            left: -50px;
+            p {
+              font-size: 100%;
+            }
+          }
+        }
+      }
+
+      .main__add-feedback {
+        font-size: 90%;
+      }
+    }
+  }
+
+  @media (max-width: 375px) {
+    .main__header {
+      .main__add-feedback {
+        /* padding: 10px; */
+        img {
+          margin: 0;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
   }
 `;

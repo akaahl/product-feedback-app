@@ -1,6 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import DesktopHeader from "../../../assets/suggestions/desktop/background-header.png";
+import TabletHeader from "../../../assets/suggestions/tablet/background-header.png";
+import MobileHeader from "../../../assets/suggestions/mobile/background-header.png";
+import hamburgerIcon from "../../../assets/shared/mobile/icon-hamburger.svg";
+import closeIcon from "../../../assets/shared/mobile/icon-close.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { filterCategory } from "../../../actions/dataActions";
@@ -9,6 +13,12 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const [buttonActive, setButtonActive] = useState(1);
+  const [showMobile, setShowMobile] = useState(false);
+
+  const handleMobileNav = (e) => {
+    e.preventDefault();
+    setShowMobile(!showMobile);
+  };
 
   const productRequests = JSON.parse(
     localStorage.getItem("data")
@@ -47,6 +57,24 @@ const Header = () => {
       <div className="header__feedback-board">
         <h3>Frontend Mentor</h3>
         <p>Feedback Board</p>
+
+        {!showMobile && (
+          <button
+            className="header__feedback-board-btns open"
+            onClick={handleMobileNav}
+          >
+            <img src={hamburgerIcon} alt="hamburger open nav" />
+          </button>
+        )}
+
+        {showMobile && (
+          <button
+            className="header__feedback-board-btns close"
+            onClick={handleMobileNav}
+          >
+            <img src={closeIcon} alt="close nav" />
+          </button>
+        )}
       </div>
 
       <div className="header__categories">
@@ -143,6 +171,7 @@ const StyledHeader = styled.header`
   flex-direction: column;
 
   .header__feedback-board {
+    position: relative;
     height: 150px;
     padding: 10px 20px;
     background-image: url(${DesktopHeader});
@@ -164,6 +193,24 @@ const StyledHeader = styled.header`
 
     p {
       margin: 10px 0;
+    }
+
+    .header__feedback-board-btns {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: 35px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        height: 25px;
+        width: 30px;
+      }
     }
   }
 
@@ -298,6 +345,33 @@ const StyledHeader = styled.header`
       margin-bottom: 40px;
       height: 190px;
       flex: 0.3;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header__feedback-board {
+      background-image: url(${TabletHeader});
+      flex: 1;
+      margin: 0;
+      border-radius: 0;
+      height: 100px;
+
+      .header__feedback-board-btns {
+        display: flex;
+      }
+    }
+
+    .header__categories,
+    .header__roadmap {
+      display: none;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .header__feedback-categories,
+    .header__feedback-board,
+    .header__feedback-roadmap {
+      font-size: 90%;
     }
   }
 `;
