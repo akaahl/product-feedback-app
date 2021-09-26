@@ -13,8 +13,8 @@ const MainMobileOverlay = () => {
           e.preventDefault();
         }}
       >
-        <HeaderCategories mobile={true} />
-        <HeaderRoadmap mobile={true} />
+        <HeaderCategories />
+        <HeaderRoadmap />
       </div>
     </StyledContainer>
   );

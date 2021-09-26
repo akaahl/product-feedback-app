@@ -9,6 +9,7 @@ import HeaderRoadmap from "./HeaderRoadmap";
 const Header = ({ showMobile, setShowMobile }) => {
   const closeMobileNav = (e) => {
     e.preventDefault();
+
     setShowMobile(false);
     document.removeEventListener("click", closeMobileNav);
     document.body.style.overflowY = "scroll";
@@ -17,10 +18,15 @@ const Header = ({ showMobile, setShowMobile }) => {
   const handleMobileNav = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setShowMobile(!showMobile);
-    // document.body.style.overflowY = "hidden";
-    document.addEventListener("click", closeMobileNav);
-    document.body.style.overflowY = "hidden";
+
+    if (showMobile) {
+      setShowMobile(false);
+      document.body.style.overflowY = "scroll";
+    } else {
+      setShowMobile(true);
+      document.addEventListener("click", closeMobileNav);
+      document.body.style.overflowY = "hidden";
+    }
   };
 
   return (
@@ -100,8 +106,8 @@ const StyledHeader = styled.header`
       justify-content: center;
 
       img {
-        height: 15px;
-        width: 20px;
+        height: 16px;
+        width: 19px;
       }
     }
   }
