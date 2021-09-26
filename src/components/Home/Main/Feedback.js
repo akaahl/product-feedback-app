@@ -150,12 +150,16 @@ const FeedbackContainer = styled.section`
 
   @media (max-width: 768px) {
     display: grid;
-    margin: 20px 20px 0 20px;
+    margin: 20px 40px 0 40px;
     grid-template-areas:
       "content content content"
       "content content content"
       "upvote . comment";
     padding: 30px;
+
+    &:hover {
+      transform: none;
+    }
 
     &:first-child {
       margin-top: 40px;
@@ -179,6 +183,43 @@ const FeedbackContainer = styled.section`
 
     .feedback__comments {
       grid-area: comment;
+    }
+  }
+
+  @media (max-width: 425px) {
+    margin: 20px 10px 0 10px;
+    padding: 20px;
+
+    button {
+      padding: 5px 10px;
+
+      img {
+        margin-right: 5px;
+      }
+
+      span {
+        font-size: 90%;
+      }
+    }
+
+    .feedback__content {
+      font-size: 90%;
+
+      .content-pill {
+        span {
+          font-size: 90%;
+        }
+      }
+    }
+
+    .feedback__comments {
+      img {
+        width: 20px;
+        height: 15px;
+      }
+      span {
+        font-size: 90%;
+      }
     }
   }
 `;

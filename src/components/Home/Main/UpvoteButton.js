@@ -79,7 +79,7 @@ const UpvoteButton = ({ upvotes, id }) => {
       <button className={upvoteStatus ? "upvoted" : ""} onClick={handleClick}>
         {!upvoteStatus && <img src={arrowUpIcon} alt="arrow up" />}
         {upvoteStatus && <img src={arrowUpWhiteIcon} alt="arrow up white" />}
-        {numberOfVotes}
+        <span>{numberOfVotes}</span>
       </button>
     </div>
   );
