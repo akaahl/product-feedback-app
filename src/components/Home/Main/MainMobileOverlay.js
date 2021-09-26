@@ -6,7 +6,13 @@ import HeaderRoadmap from "../Header/HeaderRoadmap";
 const MainMobileOverlay = () => {
   return (
     <StyledContainer>
-      <div className="main__overlay-container">
+      <div
+        className="main__overlay-container"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+      >
         <HeaderCategories mobile={true} />
         <HeaderRoadmap mobile={true} />
       </div>
@@ -31,7 +37,7 @@ const StyledContainer = styled.div`
 
     .header__categories {
       background: #ffffff;
-      padding: 35px;
+      padding: 30px;
       height: 190px;
       border-radius: 10px;
 
@@ -81,9 +87,8 @@ const StyledContainer = styled.div`
 
     .header__roadmap {
       height: 170px;
-      padding: 35px;
+      padding: 30px;
       background: #ffffff;
-      margin-top: 20px;
       border-radius: 10px;
 
       .header__roadmap-view {

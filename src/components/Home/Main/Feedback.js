@@ -14,6 +14,7 @@ const Feedback = ({
   category,
   preventRedirect,
   feedbackId,
+  selectionsLength,
 }) => {
   const history = useHistory();
 
@@ -24,6 +25,7 @@ const Feedback = ({
     <FeedbackContainer
       onClick={preventRedirect ? null : showFeedback}
       hover={feedbackId}
+      selectionsLength={selectionsLength}
     >
       <UpvoteButton upvotes={upvotes} id={id} />
 
@@ -149,7 +151,6 @@ const FeedbackContainer = styled.section`
   }
 
   @media (max-width: 768px) {
-    min-height: 100vh;
     display: grid;
     margin: 20px 40px 0 40px;
     grid-template-areas:
@@ -164,6 +165,10 @@ const FeedbackContainer = styled.section`
 
     &:first-child {
       margin-top: 40px;
+    }
+
+    &:last-child {
+      margin-bottom: ${(props) => (props.selectionsLength < 4 ? "100vh" : "0")};
     }
 
     button {
@@ -189,6 +194,8 @@ const FeedbackContainer = styled.section`
 
   @media (max-width: 425px) {
     margin: 20px 10px 0 10px;
+    margin-bottom: ${(props) => (props.selectionsLength < 4 ? "100vh" : "0")};
+
     padding: 20px;
 
     button {

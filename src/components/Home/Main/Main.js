@@ -163,6 +163,7 @@ const Main = ({ showMobile }) => {
                 comments={comments}
                 category={category}
                 key={id}
+                selectionsLength={selections.length}
               />
             )
           )}
