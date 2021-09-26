@@ -149,6 +149,7 @@ const FeedbackContainer = styled.section`
   }
 
   @media (max-width: 768px) {
+    min-height: 100vh;
     display: grid;
     margin: 20px 40px 0 40px;
     grid-template-areas:

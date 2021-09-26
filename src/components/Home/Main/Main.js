@@ -8,8 +8,9 @@ import Feedback from "./Feedback";
 import { useSelector, useDispatch } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
+import MainMobileOverlay from "./MainMobileOverlay";
 
-const Main = () => {
+const Main = ({ showMobile }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [buttonText, setButtonText] = useState("Most Upvotes");
   const [buttonId, setButtonId] = useState("1");
@@ -148,6 +149,8 @@ const Main = () => {
         </button>
       </div>
 
+      {showMobile && <MainMobileOverlay />}
+
       {selections.length > 0 && (
         <div className="main__feedback-container">
           {selections.map(
@@ -174,6 +177,7 @@ export default Main;
 const MainContainer = styled.main`
   flex: 0.8;
   margin-left: 25px;
+  position: relative;
 
   .main__header {
     background-color: #373f68;
@@ -339,7 +343,6 @@ const MainContainer = styled.main`
   @media (max-width: 375px) {
     .main__header {
       .main__add-feedback {
-        /* padding: 10px; */
         img {
           margin: 0;
         }
