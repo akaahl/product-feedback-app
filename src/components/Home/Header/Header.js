@@ -2,18 +2,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import DesktopHeader from "../../../assets/suggestions/desktop/background-header.png";
 import TabletHeader from "../../../assets/suggestions/tablet/background-header.png";
-import MobileHeader from "../../../assets/suggestions/mobile/background-header.png";
 import hamburgerIcon from "../../../assets/shared/mobile/icon-hamburger.svg";
 import closeIcon from "../../../assets/shared/mobile/icon-close.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterCategory } from "../../../actions/dataActions";
+import HeaderCategories from "./HeaderCategories";
 
-const Header = () => {
+const Header = ({ showMobile, setShowMobile }) => {
   const dispatch = useDispatch();
 
-  const [buttonActive, setButtonActive] = useState(1);
-  const [showMobile, setShowMobile] = useState(false);
+  // const [buttonActive, setButtonActive] = useState(1);
 
   const handleMobileNav = (e) => {
     e.preventDefault();
@@ -34,23 +33,23 @@ const Header = () => {
     (request) => request.status === "live"
   );
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  // const handleClick = (e) => {
+  //   e.preventDefault();
 
-    const category = e.target.className.split(" ")[1];
-    dispatch(filterCategory(category));
+  //   const category = e.target.className.split(" ")[1];
+  //   dispatch(filterCategory(category));
 
-    const id = Number(e.target.id);
-    setButtonActive(id);
-  };
+  //   const id = Number(e.target.id);
+  //   setButtonActive(id);
+  // };
 
-  const toggleActiveStyles = (category, index) => {
-    if (index === buttonActive) {
-      return `category ${category} active`;
-    } else {
-      return `category ${category}`;
-    }
-  };
+  // const toggleActiveStyles = (category, index) => {
+  //   if (index === buttonActive) {
+  //     return `category ${category} active`;
+  //   } else {
+  //     return `category ${category}`;
+  //   }
+  // };
 
   return (
     <StyledHeader>
@@ -77,7 +76,7 @@ const Header = () => {
         )}
       </div>
 
-      <div className="header__categories">
+      {/* <div className="header__categories">
         <div className="top">
           <button
             className={toggleActiveStyles("all", 1)}
@@ -128,7 +127,8 @@ const Header = () => {
             Feature
           </button>
         </div>
-      </div>
+      </div> */}
+      <HeaderCategories />
 
       <div className="header__roadmap">
         <div className="header__roadmap-view">

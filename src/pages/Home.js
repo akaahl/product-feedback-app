@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Home/Header/Header";
 import Main from "../components/Home/Main/Main";
@@ -7,6 +7,7 @@ import { fetchData, updateData } from "../actions/dataActions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [showMobile, setShowMobile] = useState(false);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
@@ -20,8 +21,8 @@ const Home = () => {
 
   return (
     <StyledContainer>
-      <Header />
-      <Main />
+      <Header showMobile={showMobile} setShowMobile={setShowMobile} />
+      <Main showMobile={showMobile} />
     </StyledContainer>
   );
 };

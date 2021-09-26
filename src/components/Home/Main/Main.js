@@ -59,7 +59,10 @@ const Main = () => {
 
     if (category && category !== "all") {
       setSelections(
-        suggestions.filter((suggestion) => suggestion.category === category)
+        suggestions.filter(
+          (suggestion) =>
+            suggestion.category.toLowerCase() === category.toLowerCase()
+        )
       );
 
       implementSort(buttonText);
