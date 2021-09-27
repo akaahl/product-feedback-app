@@ -28,6 +28,7 @@ const StyledContainer = styled.div`
   height: 100%;
   overflow-y: hidden;
   background-color: rgba(0, 0, 0, 0.2);
+  display: none;
 
   .main__overlay-container {
     background-color: #ffffff;
@@ -151,5 +152,9 @@ const StyledContainer = styled.div`
         }
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `;

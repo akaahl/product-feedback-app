@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterCategory, setButtonActive } from "../../../actions/dataActions";
 
 const HeaderCategories = () => {
   const dispatch = useDispatch();
 
-  // const [buttonActive, setButtonActive] = useState(1);
   const buttonActive = useSelector((state) => state.data.buttonActive);
 
   const handleClick = (e) => {
@@ -15,7 +14,6 @@ const HeaderCategories = () => {
     dispatch(filterCategory(category));
 
     const id = Number(e.target.id);
-    // setButtonActive(id);
     dispatch(setButtonActive(id));
   };
 
