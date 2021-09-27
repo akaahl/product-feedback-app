@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { filterCategory } from "../../../actions/dataActions";
+import { useDispatch, useSelector } from "react-redux";
+import { filterCategory, setButtonActive } from "../../../actions/dataActions";
 
 const HeaderCategories = () => {
   const dispatch = useDispatch();
-  const storageButtonId = JSON.parse(localStorage.getItem("buttonId"));
 
-  const [buttonActive, setButtonActive] = useState(
-    storageButtonId ? storageButtonId : 1
-  );
+  // const [buttonActive, setButtonActive] = useState(1);
+  const buttonActive = useSelector((state) => state.data.buttonActive);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -17,9 +15,8 @@ const HeaderCategories = () => {
     dispatch(filterCategory(category));
 
     const id = Number(e.target.id);
-    setButtonActive(id);
-    localStorage.setItem("buttonId", JSON.stringify(id));
-    console.log(typeof storageButtonId);
+    // setButtonActive(id);
+    dispatch(setButtonActive(id));
   };
 
   const toggleActiveStyles = (category, index) => {

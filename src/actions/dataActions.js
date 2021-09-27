@@ -37,3 +37,12 @@ export const updateData = (data) => async (dispatch) => {
     },
   });
 };
+
+export const setButtonActive = (id) => async (dispatch) => {
+  dispatch({
+    type: "SET_BUTTON_ACTIVE",
+    payload: {
+      id,
+    },
+  });
+};

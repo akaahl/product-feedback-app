@@ -4,6 +4,7 @@ const initialState = {
   currentUser: storagedata.currentUser || {},
   productRequests: storagedata.productRequests || [],
   category: "",
+  buttonActive: 1,
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         currentUser: action.payload.currentUser,
         productRequests: action.payload.productRequests,
+      };
+
+    case "SET_BUTTON_ACTIVE":
+      return {
+        ...state,
+        buttonActive: action.payload.id,
       };
 
     default:
