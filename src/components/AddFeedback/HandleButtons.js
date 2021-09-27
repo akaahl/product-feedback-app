@@ -134,4 +134,28 @@ const StyledHandleButtons = styled.div`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    margin-bottom: 10px;
+    margin-top: -10px;
+
+    .delete {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .feedback__handleButtons {
+      display: flex;
+      flex-direction: column-reverse;
+      width: 100%;
+
+      button {
+        &.cancel {
+          margin-right: 0;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
 `;

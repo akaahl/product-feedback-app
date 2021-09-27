@@ -470,6 +470,27 @@ const StyledContainer = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
+
+    main {
+      padding: 15px;
+      h1 {
+        font-size: 20px;
+      }
+      form {
+        .feedback__submit-cancel-buttons {
+          margin-top: 15px;
+          display: flex;
+          flex-direction: column-reverse;
+          align-self: initial;
+
+          button {
+            &.feedback__cancel-btn {
+              margin: 10px 0 0;
+            }
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: 425px) {
@@ -483,9 +504,11 @@ const StyledContainer = styled.div`
       h1 {
         font-size: 100%;
       }
-
       form {
-        label {
+        label,
+        input[type="text"],
+        p,
+        textarea {
           font-size: 90%;
         }
 
@@ -496,6 +519,26 @@ const StyledContainer = styled.div`
             font-size: 90%;
             padding: 10px 15px;
           }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 310px) {
+    main {
+      form {
+        .feedback__input-options {
+          top: 290px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 280px) {
+    main {
+      form {
+        .feedback__input-options {
+          top: 315px;
         }
       }
     }
