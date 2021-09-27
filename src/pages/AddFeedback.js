@@ -467,4 +467,37 @@ const StyledContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 425px) {
+    nav {
+      button {
+        font-size: 90%;
+      }
+    }
+
+    main {
+      h1 {
+        font-size: 100%;
+      }
+
+      form {
+        label {
+          font-size: 90%;
+        }
+
+        .feedback__input-options {
+          top: 275px;
+
+          span {
+            font-size: 90%;
+            padding: 10px 15px;
+          }
+        }
+      }
+    }
+  }
 `;
