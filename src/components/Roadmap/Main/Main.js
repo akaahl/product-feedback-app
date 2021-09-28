@@ -143,16 +143,18 @@ const StyledMain = styled.main`
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 150px;
+    top: 170px;
     left: 0;
     justify-content: space-between;
     padding-left: 20px;
+    /* margin-bottom: 20px; */
 
     .main__planned,
     .main__in-progress,
     .main__live {
       /* flex: 1; */
       width: 100vw;
+      padding: 20px 20px 100px 20px;
     }
   }
 `;

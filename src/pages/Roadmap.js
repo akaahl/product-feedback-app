@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Roadmap/Header/Header";
 import Main from "../components/Roadmap/Main/Main";
@@ -7,6 +7,7 @@ import { updateData } from "../actions/dataActions";
 import MobileNav from "../components/Roadmap/MobileNav";
 
 const Roadmap = () => {
+  const [status, setStatus] = useState("planned");
   const dispatch = useDispatch();
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
@@ -17,7 +18,7 @@ const Roadmap = () => {
   return (
     <RoadmapContainer>
       <Header />
-      <MobileNav />
+      <MobileNav status={status} setStatus={setStatus} />
       <Main />
     </RoadmapContainer>
   );
