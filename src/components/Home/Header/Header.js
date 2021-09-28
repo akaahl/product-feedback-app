@@ -10,9 +10,9 @@ const Header = ({ showMobile, setShowMobile }) => {
   const closeMobileNav = (e) => {
     e.preventDefault();
 
+    document.body.style.overflowY = "scroll";
     setShowMobile(false);
     document.removeEventListener("click", closeMobileNav);
-    document.body.style.overflowY = "scroll";
   };
 
   const handleMobileNav = (e) => {
@@ -20,12 +20,12 @@ const Header = ({ showMobile, setShowMobile }) => {
     e.preventDefault();
 
     if (showMobile) {
-      setShowMobile(false);
       document.body.style.overflowY = "scroll";
+      setShowMobile(false);
     } else {
+      document.body.style.overflowY = "hidden";
       setShowMobile(true);
       document.addEventListener("click", closeMobileNav);
-      document.body.style.overflowY = "hidden";
     }
   };
 

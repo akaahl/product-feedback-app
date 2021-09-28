@@ -21,7 +21,10 @@ const HeaderRoadmap = () => {
       <div className="header__roadmap-view">
         <h3>Roadmap</h3>
 
-        <Link to="/roadmap">
+        <Link
+          to="/roadmap"
+          onClick={() => (document.body.style.overflowY = "scroll")}
+        >
           <p>View</p>
         </Link>
       </div>

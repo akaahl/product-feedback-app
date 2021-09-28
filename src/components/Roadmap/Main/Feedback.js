@@ -13,6 +13,7 @@ const Feedback = ({
   comments,
   category,
   status,
+  roadmap,
 }) => {
   const history = useHistory();
 
@@ -26,6 +27,7 @@ const Feedback = ({
           : "live"
       }
       onClick={() => history.push(`/edit-feedback/${id}`)}
+      roadmap={roadmap}
     >
       <div className="section__status">
         <div className="section__status-circle"></div>
@@ -68,7 +70,7 @@ const StyledFeedback = styled.section`
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    transform: scale(1.02);
+    transform: ${({ roadmap }) => (roadmap ? "scale(1)" : "scale(1.02)")};
   }
 
   &.planned {

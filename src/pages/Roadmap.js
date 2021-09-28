@@ -19,7 +19,7 @@ const Roadmap = () => {
     <RoadmapContainer>
       <Header />
       <MobileNav status={status} setStatus={setStatus} />
-      <Main />
+      <Main status={status} />
     </RoadmapContainer>
   );
 };

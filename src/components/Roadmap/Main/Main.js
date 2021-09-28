@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Feedback from "./Feedback";
+import { useParams } from "react-router-dom";
 
-const Main = () => {
+const Main = ({ status }) => {
   const [planned, setPlanned] = useState(null);
   const [inProgress, setInProgress] = useState(null);
   const [live, setLive] = useState(null);
+  const { id } = useParams();
+  const roadmap = id;
+  console.log(roadmap);
 
   useEffect(() => {
     const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
@@ -18,8 +22,21 @@ const Main = () => {
   }, []);
 
   return (
-    <StyledMain>
-      <div className="main__planned">
+    <StyledMain
+      status={status}
+      className={
+        status === "planned"
+          ? "planned"
+          : status === "in-progress"
+          ? "in-progress"
+          : "live"
+      }
+    >
+      <div
+        className={
+          status === "planned" ? "main__planned active" : "main__planned"
+        }
+      >
         <div className="main__header">
           <p className="main__header_category">Planned ({planned?.length})</p>
           <p>Ideas prioritized for research</p>
@@ -45,12 +62,19 @@ const Main = () => {
                 category={category}
                 key={id}
                 status={status}
+                roadmap={roadmap}
               />
             )
           )}
       </div>
 
-      <div className="main__in-progress">
+      <div
+        className={
+          status === "in-progress"
+            ? "main__in-progress active"
+            : "main__in-progress"
+        }
+      >
         <div className="main__header">
           <p className="main__header_category">
             In Progress ({inProgress?.length})
@@ -83,7 +107,7 @@ const Main = () => {
           )}
       </div>
 
-      <div className="main__live">
+      <div className={status === "live" ? "main__live active" : "main__live"}>
         <div className="main__header">
           <p className="main__header_category">Live ({live?.length})</p>
           <p>Released features</p>
@@ -144,9 +168,16 @@ const StyledMain = styled.main`
   @media (max-width: 768px) {
     position: absolute;
     top: 170px;
-    left: 0;
+    transition: left 0.2s ease-in-out;
+    left: ${({ status }) =>
+      status === "planned"
+        ? "0"
+        : status === "in-progress"
+        ? "-105vw"
+        : "-210vw"};
     justify-content: space-between;
     padding-left: 20px;
+    transition: none;
     /* margin-bottom: 20px; */
 
     .main__planned,
