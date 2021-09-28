@@ -161,17 +161,6 @@ const StyledFeedback = styled.main`
 
   @media (max-width: 768px) {
     width: 90%;
-
-    /* nav {
-      .feedback__nav-back-btn {
-        font-size: 90%;
-      }
-
-      .feedback__nav-edit-btn {
-        font-size: 80%;
-        padding: 10px;
-      }
-    } */
   }
 
   @media (max-width: 425px) {

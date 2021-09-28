@@ -4,6 +4,7 @@ import Header from "../components/Roadmap/Header/Header";
 import Main from "../components/Roadmap/Main/Main";
 import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
+import MobileNav from "../components/Roadmap/MobileNav";
 
 const Roadmap = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Roadmap = () => {
   return (
     <RoadmapContainer>
       <Header />
+      <MobileNav />
       <Main />
     </RoadmapContainer>
   );
@@ -28,4 +30,9 @@ const RoadmapContainer = styled.div`
   flex-direction: column;
   margin: 70px 0;
   width: 1100px;
+
+  @media (max-width: 768px) {
+    margin: 0;
+    overflow: hidden;
+  }
 `;

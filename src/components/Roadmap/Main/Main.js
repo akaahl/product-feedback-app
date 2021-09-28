@@ -123,6 +123,7 @@ const StyledMain = styled.main`
   display: flex;
   justify-content: space-evenly;
   margin-top: 25px;
+  /* min-width: 100vw; */
 
   .main__planned,
   .main__in-progress,
@@ -137,6 +138,21 @@ const StyledMain = styled.main`
         color: #3a4374;
         font-weight: 600;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    justify-content: space-between;
+    padding-left: 20px;
+
+    .main__planned,
+    .main__in-progress,
+    .main__live {
+      /* flex: 1; */
+      width: 100vw;
     }
   }
 `;

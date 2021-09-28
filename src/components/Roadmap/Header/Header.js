@@ -11,14 +11,14 @@ const Header = () => {
     <StyledHeader>
       <div className="header__left-side">
         <button onClick={() => history.push("/")}>
-          <img src={arrowIcon} alt="arrow left" /> Go Back
+          <img src={arrowIcon} alt="arrow left" /> <span>Go Back</span>
         </button>
         <h1>Roadmap</h1>
       </div>
 
       <div className="header__right-side">
         <button onClick={() => history.push("/add-feedback")}>
-          <img src={plusIcon} alt="plus" /> Add Feedback
+          <img src={plusIcon} alt="plus" /> <span>Add Feedback</span>
         </button>
       </div>
     </StyledHeader>
@@ -114,6 +114,47 @@ const StyledHeader = styled.header`
 
       img {
         margin-right: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+    padding: 20px;
+
+    .header__left-side {
+      button {
+        span {
+          font-size: 90%;
+        }
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+
+    .header__right-side {
+      button {
+        padding: 10px 15px;
+
+        img {
+          margin-right: 0;
+        }
+
+        span {
+          font-size: 90%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 375px) {
+    .header__right-side {
+      button {
+        span {
+          display: none;
+        }
       }
     }
   }

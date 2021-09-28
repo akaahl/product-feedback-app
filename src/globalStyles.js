@@ -11,12 +11,15 @@ const GlobalStyle = createGlobalStyle`
     body {
         
         background: #F2F4FF;
-        font-family: 'Jost', sans-serif
+        font-family: 'Jost', sans-serif;
+        
+        @media (max-width: 768px) {
+                    
+            overflow-x: hidden;
+        }
     }
 
-    @media (max-width: 768px) {
-        
-    }
+ 
 `;
 
 export default GlobalStyle;
