@@ -26,6 +26,7 @@ const Feedback = ({
       onClick={preventRedirect ? null : showFeedback}
       hover={feedbackId}
       selectionsLength={selectionsLength}
+      feedbackId={feedbackId}
     >
       <UpvoteButton upvotes={upvotes} id={id} />
 
@@ -151,8 +152,10 @@ const FeedbackContainer = styled.section`
   }
 
   @media (max-width: 768px) {
+    width: ${(props) => (props.feedbackId ? "100%" : "")};
     display: grid;
-    margin: 20px 40px 0 40px;
+    margin: ${(props) =>
+      props.feedbackId ? "20px 0 0 0" : "20px 40px 0 40px"};
     grid-template-areas:
       "content content content"
       "content content content"
@@ -193,7 +196,8 @@ const FeedbackContainer = styled.section`
   }
 
   @media (max-width: 425px) {
-    margin: 20px 10px 0 10px;
+    margin: ${(props) =>
+      props.feedbackId ? "20px 0 0 0" : "20px 10px 0 10px"};
     margin-bottom: ${(props) => (props.selectionsLength < 4 ? "100vh" : "0")};
 
     padding: 20px;
@@ -206,16 +210,16 @@ const FeedbackContainer = styled.section`
       }
 
       span {
-        font-size: 90%;
+        font-size: 80%;
       }
     }
 
     .feedback__content {
-      font-size: 90%;
+      font-size: 80%;
 
       .content-pill {
         span {
-          font-size: 90%;
+          font-size: 80%;
         }
       }
     }
@@ -226,7 +230,7 @@ const FeedbackContainer = styled.section`
         height: 15px;
       }
       span {
-        font-size: 90%;
+        font-size: 80%;
       }
     }
   }

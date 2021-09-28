@@ -5,6 +5,7 @@ import InnerComments from "./InnerComments";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 import { v4 as uuidv4 } from "uuid";
+import Form from "./Form";
 
 const Comments = ({
   commentId,
@@ -16,13 +17,13 @@ const Comments = ({
   replies,
 }) => {
   const dispatch = useDispatch();
-  const [textArea, setTextArea] = useState("");
+  // const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
-  const [formFocus, setFormFocus] = useState(false);
+  // const [formFocus, setFormFocus] = useState(false);
 
-  const handleChange = (e) => {
-    setTextArea((text) => e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setTextArea((text) => e.target.value);
+  // };
 
   const handleReply = (e) => {
     e.preventDefault();
@@ -81,67 +82,46 @@ const Comments = ({
 
   return (
     <StyledComments>
-      <img src={process.env.PUBLIC_URL + "/" + imageUrl} alt={name} />
+      <div className="feedback__top">
+        <img src={process.env.PUBLIC_URL + "/" + imageUrl} alt={name} />
 
-      <div className="feedback__comments-content">
-        <div className="feedback__content-top">
-          <div className="feedback__content-top-user-details">
+        <div className="feedback__top-details">
+          <div className="feedback__top-details-user">
             <p>{name}</p>
             <span>@{username}</span>
           </div>
 
-          <button className="feedback__content-reply-btn" onClick={handleReply}>
+          <button
+            className="feedback__top-details-reply-btn"
+            onClick={handleReply}
+          >
             Reply
           </button>
         </div>
+      </div>
 
-        <div className="feedback__content-bottom">
-          <p>{content}</p>
+      <p className="feedback__content">{content}</p>
 
-          {reply && (
-            <form
-              className={
-                formFocus
-                  ? "feedback__content-bottom-reply active"
-                  : "feedback__content-bottom-reply"
-              }
-            >
-              <textarea
-                name="replyComment"
-                placeholder={`Replying to @${username}`}
-                value={textArea}
-                onChange={handleChange}
-                onFocus={() => setFormFocus(true)}
-                onBlur={() => setFormFocus(false)}
-              ></textarea>
+      {reply && (
+        <Form
+          username={username}
+          addInnerReplies={addInnerReplies}
+          feedbackId={feedbackId}
+          commentId={commentId}
+          setReply={setReply}
+          mobile={true}
+        />
+      )}
 
-              <button
-                className={textArea ? "" : "disabled"}
-                disabled={!textArea ? true : false}
-                onClick={(e) => {
-                  e.preventDefault();
-                  addInnerReplies(textArea, username, feedbackId, commentId);
-                  setTextArea((text) => "");
-                  setReply((reply) => false);
-                }}
-              >
-                <Icon
-                  icon="mdi:send-circle-outline"
-                  className={textArea ? "reply-icon" : "reply-icon disabled"}
-                />
-              </button>
-            </form>
-          )}
-
-          {name.trim() === "Zena Kelley" ? (
-            <div className="feedback__content-delete">
-              <button type="button" onClick={deleteComment}>
-                <Icon icon="mdi:delete" className="delete-btn" />
-              </button>
-            </div>
-          ) : null}
+      {name.trim() === "Zena Kelley" ? (
+        <div className="feedback__content-delete">
+          <button type="button" onClick={deleteComment}>
+            <Icon icon="mdi:delete" className="delete-btn" />
+          </button>
         </div>
+      ) : null}
 
+      <div className="feedback__comments-content">
         {replies &&
           replies.map(
             ({ content, replyingTo, user: { image, name, username } }) => (
@@ -155,6 +135,7 @@ const Comments = ({
                 commentId={commentId}
                 feedbackId={feedbackId}
                 addInnerReplies={addInnerReplies}
+                setReply={setReply}
               />
             )
           )}
@@ -168,22 +149,97 @@ export default Comments;
 
 const StyledComments = styled.div`
   display: flex;
-  margin-top: 15px;
-  padding-bottom: 15px;
+  flex-direction: column;
+  margin-top: 20px;
 
-  img {
-    align-self: flex-start;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: contain;
+  .feedback__top {
+    display: flex;
+
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    .feedback__top-details {
+      flex: 1;
+      display: flex;
+      margin-left: 20px;
+
+      .feedback__top-details-user {
+        flex: 1;
+
+        p {
+          color: #3a4374;
+          font-weight: 700;
+          font-size: 14px;
+        }
+
+        span {
+          color: #647196;
+          font-size: 14px;
+        }
+      }
+
+      .feedback__top-details-reply-btn {
+        background: none;
+        border: none;
+        color: #4661e6;
+        cursor: pointer;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .feedback__content {
+    margin-top: 20px;
+    margin-left: 70px;
+    color: #647196;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    span {
+      color: #ad1fea;
+      font-weight: 600;
+      font-size: 15px;
+    }
+  }
+
+  .feedback__content-delete {
+    margin-top: 20px;
+    align-self: flex-end;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0 0 auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .delete-btn {
+        color: #647196;
+        opacity: 0.5;
+        height: 22px;
+        width: 22px;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      &:hover {
+        .delete-btn {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .feedback__comments-content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 40px;
+    margin-left: 20px;
 
     .feedback__content-top {
       display: flex;
@@ -211,123 +267,49 @@ const StyledComments = styled.div`
       }
     }
 
-    .feedback__content-bottom {
-      margin-top: 20px;
+    hr {
+      margin-top: 25px;
+      border: 0.1px solid rgba(0, 0, 0, 0.04);
+    }
+  }
 
-      p {
-        color: #647196;
-        font-size: 16px;
-        margin-bottom: 10px;
+  @media (max-width: 768px) {
+    .feedback__content {
+      margin-left: 0;
+    }
 
-        span {
-          color: #ad1fea;
-          font-weight: 600;
-          font-size: 15px;
-        }
+    .feedback__comments-content {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .feedback__top {
+      img {
+        height: 35px;
+        width: 35px;
       }
 
-      .feedback__content-delete {
-        margin-top: 20px;
-        margin-bottom: 15px;
-        display: flex;
-
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 0 0 auto;
-          background: none;
-          border: none;
-          cursor: pointer;
-
-          .delete-btn {
-            color: #647196;
-            opacity: 0.5;
-            height: 22px;
-            width: 22px;
-            transition: opacity 0.2s ease-in-out;
-          }
-
-          &:hover {
-            .delete-btn {
-              opacity: 1;
-            }
-          }
-        }
-      }
-
-      .feedback__content-bottom-reply {
-        margin-top: 15px;
-        border: 1px solid transparent;
-        border-radius: 10px;
-        background-color: #f7f8fd;
-        display: flex;
-        padding: 15px;
-        transition: border 0.2s ease-in-out;
-
-        &.active {
-          border: 1px solid #4661e6;
-          outline: none;
-        }
-
-        textarea {
-          flex: 1;
-          height: 110px;
-          border: 1px solid transparent;
-          background-color: #f7f8fd;
-          resize: none;
-          font-size: 17px;
-          color: #647196;
-
-          &:focus {
-            outline: none;
-          }
-
-          &::placeholder {
-            color: #647196;
-            opacity: 0.7;
-            font-size: 14px;
+      .feedback__top-details {
+        .feedback__top-details-user {
+          p,
+          span {
+            font-size: 80%;
           }
         }
 
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: none;
-          border: none;
-          align-self: flex-end;
-          cursor: pointer;
-
-          .reply-icon {
-            height: 25px;
-            width: 25px;
-            color: #4661e6;
-            transition: color 0.2s ease-in;
-
-            &:hover {
-              color: #ad1fea;
-              transition: color 0.2s ease-in;
-            }
-
-            &.disabled {
-              color: rgba(0, 0, 0, 0.2);
-              transition: color 0.2s ease-in-out;
-            }
-          }
-
-          &.disabled {
-            cursor: not-allowed;
-            pointer-events: none;
-          }
+        .feedback__top-details-reply-btn {
+          font-size: 80%;
         }
       }
     }
 
-    hr {
-      margin-top: 25px;
-      margin-left: -51px;
-      border: 0.2px solid rgba(0, 0, 0, 0.05);
+    .feedback__content {
+      font-size: 90%;
+
+      span {
+        font-size: 90%;
+      }
     }
   }
 `;

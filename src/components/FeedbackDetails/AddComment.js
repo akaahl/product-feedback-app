@@ -152,4 +152,25 @@ const StyledAddComment = styled.div`
       }
     }
   }
+
+  @media (max-width: 425px) {
+    padding: 15px;
+
+    h4 {
+      font-size: 90%;
+    }
+
+    form {
+      textarea {
+        font-size: 90%;
+      }
+
+      .addComment__submit {
+        button {
+          padding: 10px;
+          font-size: 80%;
+        }
+      }
+    }
+  }
 `;
