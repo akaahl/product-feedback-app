@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Feedback from "./Feedback";
-import { useParams } from "react-router-dom";
 
 const Main = ({ status }) => {
   const [planned, setPlanned] = useState(null);
   const [inProgress, setInProgress] = useState(null);
   const [live, setLive] = useState(null);
-  const { id } = useParams();
-  const roadmap = id;
-  console.log(roadmap);
 
   useEffect(() => {
     const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
@@ -62,7 +58,7 @@ const Main = ({ status }) => {
                 category={category}
                 key={id}
                 status={status}
-                roadmap={roadmap}
+                roadmap={true}
               />
             )
           )}
@@ -102,6 +98,7 @@ const Main = ({ status }) => {
                 category={category}
                 key={id}
                 status={status}
+                roadmap={true}
               />
             )
           )}
@@ -133,6 +130,7 @@ const Main = ({ status }) => {
                 category={category}
                 key={id}
                 status={status}
+                roadmap={true}
               />
             )
           )}
@@ -171,10 +169,10 @@ const StyledMain = styled.main`
     transition: left 0.2s ease-in-out;
     left: ${({ status }) =>
       status === "planned"
-        ? "0"
+        ? "-2vw"
         : status === "in-progress"
-        ? "-105vw"
-        : "-210vw"};
+        ? "-107vw"
+        : "-212vw"};
     justify-content: space-between;
     padding-left: 20px;
     transition: none;
@@ -185,7 +183,23 @@ const StyledMain = styled.main`
     .main__live {
       /* flex: 1; */
       width: 100vw;
-      padding: 20px 20px 100px 20px;
+      padding: 20px 0 0 20px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .main__planned,
+    .main__in-progress,
+    .main__live {
+      padding: 20px 20px 0 20px;
+    }
+  }
+
+  @media (max-width: 280px) {
+    .main__planned,
+    .main__in-progress,
+    .main__live {
+      padding: 20px 0px 0 0;
     }
   }
 `;

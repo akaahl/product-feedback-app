@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
 import MainMobileOverlay from "./MainMobileOverlay";
+import { Flipper, Flipped } from "react-flip-toolkit";
 
 const Main = ({ showMobile }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -106,69 +107,73 @@ const Main = ({ showMobile }) => {
 
   return (
     <MainContainer>
-      <div className="main__header">
-        <div className="main__header-suggestion">
-          <img src={suggestionIcon} alt="suggestion" />
-          <p>{suggestions.length} Suggestions</p>
-        </div>
+      <Flipper flipKey={`${category}-${buttonText}`} spring="stiff">
+        <div className="main__header">
+          <div className="main__header-suggestion">
+            <img src={suggestionIcon} alt="suggestion" />
+            <p>{suggestions.length} Suggestions</p>
+          </div>
 
-        <div className="main__header-sort">
-          <p>Sort By : </p>
+          <div className="main__header-sort">
+            <p>Sort By : </p>
 
-          <button className="header-select-options" onClick={handleClick}>
-            {buttonText}{" "}
-            <img
-              src={arrowIcon}
-              alt="arrow"
-              className={showOptions ? "active" : ""}
-            />
-            {showOptions && (
-              <div className="selections-container" ref={selectionsRef}>
-                <p onClick={handleSelect} id="1">
-                  Most Upvotes {showArrowIcon("1")}
-                </p>
-                <p onClick={handleSelect} id="2">
-                  Least Upvotes {showArrowIcon("2")}
-                </p>
-                <p onClick={handleSelect} id="3">
-                  Most Comments {showArrowIcon("3")}
-                </p>
-                <p onClick={handleSelect} id="4">
-                  Least Comments {showArrowIcon("4")}
-                </p>
-              </div>
-            )}
+            <button className="header-select-options" onClick={handleClick}>
+              {buttonText}{" "}
+              <img
+                src={arrowIcon}
+                alt="arrow"
+                className={showOptions ? "active" : ""}
+              />
+              {showOptions && (
+                <div className="selections-container" ref={selectionsRef}>
+                  <p onClick={handleSelect} id="1">
+                    Most Upvotes {showArrowIcon("1")}
+                  </p>
+                  <p onClick={handleSelect} id="2">
+                    Least Upvotes {showArrowIcon("2")}
+                  </p>
+                  <p onClick={handleSelect} id="3">
+                    Most Comments {showArrowIcon("3")}
+                  </p>
+                  <p onClick={handleSelect} id="4">
+                    Least Comments {showArrowIcon("4")}
+                  </p>
+                </div>
+              )}
+            </button>
+          </div>
+
+          <button
+            className="main__add-feedback"
+            onClick={() => history.push("/add-feedback")}
+          >
+            <img src={plusIcon} alt="icon" /> <span>Add Feedback</span>
           </button>
         </div>
 
-        <button
-          className="main__add-feedback"
-          onClick={() => history.push("/add-feedback")}
-        >
-          <img src={plusIcon} alt="icon" /> <span>Add Feedback</span>
-        </button>
-      </div>
+        {showMobile && <MainMobileOverlay />}
 
-      {showMobile && <MainMobileOverlay />}
-
-      {selections.length > 0 && (
-        <div className="main__feedback-container">
-          {selections.map(
-            ({ upvotes, title, id, description, comments, category }) => (
-              <Feedback
-                upvotes={upvotes}
-                title={title}
-                id={id}
-                description={description}
-                comments={comments}
-                category={category}
-                key={id}
-                selectionsLength={selections.length}
-              />
-            )
-          )}
-        </div>
-      )}
+        {selections.length > 0 && (
+          <Flipped flipId="list">
+            <div className="main__feedback-container">
+              {selections.map(
+                ({ upvotes, title, id, description, comments, category }) => (
+                  <Feedback
+                    upvotes={upvotes}
+                    title={title}
+                    id={id}
+                    description={description}
+                    comments={comments}
+                    category={category}
+                    key={id}
+                    selectionsLength={selections.length}
+                  />
+                )
+              )}
+            </div>
+          </Flipped>
+        )}
+      </Flipper>
     </MainContainer>
   );
 };

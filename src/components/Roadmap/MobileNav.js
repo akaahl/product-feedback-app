@@ -106,4 +106,11 @@ const MobileNavContainer = styled.nav`
       padding: 20px 10px;
     }
   }
+
+  @media (max-width: 290px) {
+    button {
+      font-size: 11px;
+      padding: 20px 0;
+    }
+  }
 `;

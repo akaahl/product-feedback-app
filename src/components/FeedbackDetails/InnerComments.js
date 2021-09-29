@@ -17,13 +17,13 @@ const InnerComments = ({
   setReply,
 }) => {
   const dispatch = useDispatch();
-  const [formFocus, setFormFocus] = useState(false);
-  const [textArea, setTextArea] = useState("");
+  // const [formFocus, setFormFocus] = useState(false);
+  // const [textArea, setTextArea] = useState("");
   const [innerReply, setInnerReply] = useState(false);
 
-  const handleChange = (e) => {
-    setTextArea((text) => e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setTextArea((text) => e.target.value);
+  // };
 
   const handleReply = (e) => {
     e.preventDefault();
@@ -104,7 +104,6 @@ const StyledInnerComments = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 35px;
-  /* margin-left: 20px; */
   padding-left: 30px;
   border-left: 0.2px solid rgba(0, 0, 0, 0.07);
 

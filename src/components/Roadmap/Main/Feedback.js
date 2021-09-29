@@ -70,7 +70,7 @@ const StyledFeedback = styled.section`
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    transform: ${({ roadmap }) => (roadmap ? "scale(1)" : "scale(1.02)")};
+    transform: scale(1.02);
   }
 
   &.planned {
@@ -206,6 +206,12 @@ const StyledFeedback = styled.section`
         color: #3a4374;
         font-weight: 600;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      transform: ${({ roadmap }) => (roadmap ? "scale(1)" : "scale(1.02)")};
     }
   }
 `;
