@@ -5,6 +5,7 @@ import Main from "../components/Roadmap/Main/Main";
 import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
 import MobileNav from "../components/Roadmap/MobileNav";
+import { motion } from "framer-motion";
 
 const Roadmap = () => {
   const [status, setStatus] = useState("planned");
@@ -15,8 +16,31 @@ const Roadmap = () => {
     dispatch(updateData(data));
   }, [dispatch]);
 
+  const roadmapVariants = {
+    initial: {
+      opacity: 0,
+      y: 300,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        when: "beforeChildren",
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: -500,
+    },
+  };
+
   return (
-    <RoadmapContainer>
+    <RoadmapContainer
+      variants={roadmapVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <Header />
       <MobileNav status={status} setStatus={setStatus} />
       <Main status={status} />
@@ -26,7 +50,7 @@ const Roadmap = () => {
 
 export default Roadmap;
 
-const RoadmapContainer = styled.div`
+const RoadmapContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   margin: 70px 0;

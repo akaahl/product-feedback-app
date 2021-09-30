@@ -1,17 +1,19 @@
 import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 import Home from "./pages/Home";
 import Roadmap from "./pages/Roadmap";
 import AddFeedback from "./pages/AddFeedback";
 import FeedbackDetails from "./pages/FeedbackDetails";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
   return (
     <StyledApp>
       <GlobalStyle />
-      <Router>
-        <Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
           <Route path="/" exact>
             <Home />
           </Route>
@@ -32,7 +34,7 @@ function App() {
             <FeedbackDetails />
           </Route>
         </Switch>
-      </Router>
+      </AnimatePresence>
     </StyledApp>
   );
 }
@@ -44,4 +46,5 @@ const StyledApp = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 `;

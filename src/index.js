@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import persistedReducer from "./reducers";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,7 +24,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Feedback from "./Feedback";
+import { motion } from "framer-motion";
 
 const Main = ({ status }) => {
   const [planned, setPlanned] = useState(null);
@@ -17,6 +18,27 @@ const Main = ({ status }) => {
     setLive(feedbacks.filter((feedback) => feedback.status === "live"));
   }, []);
 
+  const mainVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const childrenVariants = {
+    initial: {
+      opacity: 0,
+      y: 700,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+    },
+  };
+
   return (
     <StyledMain
       status={status}
@@ -27,11 +49,17 @@ const Main = ({ status }) => {
           ? "in-progress"
           : "live"
       }
+      variants={mainVariants}
+      initial="initial"
+      animate="animate"
     >
-      <div
+      <motion.div
         className={
           status === "planned" ? "main__planned active" : "main__planned"
         }
+        variants={childrenVariants}
+        // initial="initial"
+        // animate="animate"
       >
         <div className="main__header">
           <p className="main__header_category">Planned ({planned?.length})</p>
@@ -62,14 +90,17 @@ const Main = ({ status }) => {
               />
             )
           )}
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
         className={
           status === "in-progress"
             ? "main__in-progress active"
             : "main__in-progress"
         }
+        variants={childrenVariants}
+        // initial="initial"
+        // animate="animate"
       >
         <div className="main__header">
           <p className="main__header_category">
@@ -102,9 +133,14 @@ const Main = ({ status }) => {
               />
             )
           )}
-      </div>
+      </motion.div>
 
-      <div className={status === "live" ? "main__live active" : "main__live"}>
+      <motion.div
+        className={status === "live" ? "main__live active" : "main__live"}
+        variants={childrenVariants}
+        // initial="initial"
+        // animate="animate"
+      >
         <div className="main__header">
           <p className="main__header_category">Live ({live?.length})</p>
           <p>Released features</p>
@@ -134,18 +170,17 @@ const Main = ({ status }) => {
               />
             )
           )}
-      </div>
+      </motion.div>
     </StyledMain>
   );
 };
 
 export default Main;
 
-const StyledMain = styled.main`
+const StyledMain = styled(motion.main)`
   display: flex;
   justify-content: space-evenly;
   margin-top: 25px;
-  /* min-width: 100vw; */
 
   .main__planned,
   .main__in-progress,

@@ -10,6 +10,7 @@ import { updateData } from "../actions/dataActions";
 import { useParams } from "react-router-dom";
 import UpdateStatus from "../components/AddFeedback/UpdateStatus";
 import HandleButtons from "../components/AddFeedback/HandleButtons";
+import { motion } from "framer-motion";
 
 const AddFeedback = () => {
   const history = useHistory();
@@ -122,7 +123,11 @@ const AddFeedback = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      initial={{ scale: 0 }}
+      animate={{ scale: 1, transition: { type: "spring", duration: 1 } }}
+      exit={{ y: 400, opacity: 0 }}
+    >
       <nav>
         <button onClick={() => history.goBack()}>
           <img src={arrowLeftIcon} alt="arrow left" />
@@ -230,7 +235,7 @@ const AddFeedback = () => {
 
 export default AddFeedback;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   margin: 70px 0;
   width: 800px;
 

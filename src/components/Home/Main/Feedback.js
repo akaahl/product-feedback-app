@@ -4,6 +4,7 @@ import commentsIcon from "../../../assets/shared/icon-comments.svg";
 import { totalComments } from "../../../utils/utilityFunctions";
 import UpvoteButton from "./UpvoteButton";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Feedback = ({
   upvotes,
@@ -15,11 +16,25 @@ const Feedback = ({
   preventRedirect,
   feedbackId,
   selectionsLength,
+  index,
 }) => {
   const history = useHistory();
 
   const showFeedback = (e) => {
     history.push(`/feedback/${id}`);
+  };
+
+  const feedbackVariants = {
+    initial: { x: -100, opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "tween",
+        ease: "linear",
+        delay: index * 0.1,
+      },
+    },
   };
   return (
     <FeedbackContainer
@@ -27,6 +42,9 @@ const Feedback = ({
       hover={feedbackId}
       selectionsLength={selectionsLength}
       feedbackId={feedbackId}
+      variants={feedbackVariants}
+      initial="initial"
+      animate="animate"
     >
       <UpvoteButton upvotes={upvotes} id={id} />
 
@@ -45,10 +63,9 @@ const Feedback = ({
     </FeedbackContainer>
   );
 };
-
 export default Feedback;
 
-const FeedbackContainer = styled.section`
+const FeedbackContainer = styled(motion.section)`
   cursor: ${(props) => (!props.hover ? "pointer" : "default")};
   margin-top: 20px;
   padding: 20px;

@@ -4,13 +4,26 @@ import Header from "../components/Home/Header/Header";
 import Main from "../components/Home/Main/Main";
 import { useDispatch } from "react-redux";
 import { fetchData, updateData } from "../actions/dataActions";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [showMobile, setShowMobile] = useState(false);
+  const homeVariants = {
+    initial: { y: -100, opacity: 0 },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, when: "beforeChildren" },
+    },
+    exit: { x: 400, opacity: 0 },
+  };
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
+    window.scrollTo({
+      top: 0,
+    });
 
     if (!data) {
       dispatch(fetchData());
@@ -20,7 +33,12 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      variants={homeVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <Header showMobile={showMobile} setShowMobile={setShowMobile} />
       <Main showMobile={showMobile} />
     </StyledContainer>
@@ -29,7 +47,7 @@ const Home = () => {
 
 export default Home;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   margin: 70px 0;
   width: 1100px;
   display: flex;
