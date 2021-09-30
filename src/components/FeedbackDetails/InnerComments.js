@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 import Form from "./Form";
+import { AnimatePresence } from "framer-motion";
 
 const InnerComments = ({
   content,
@@ -17,13 +18,7 @@ const InnerComments = ({
   setReply,
 }) => {
   const dispatch = useDispatch();
-  // const [formFocus, setFormFocus] = useState(false);
-  // const [textArea, setTextArea] = useState("");
   const [innerReply, setInnerReply] = useState(false);
-
-  // const handleChange = (e) => {
-  //   setTextArea((text) => e.target.value);
-  // };
 
   const handleReply = (e) => {
     e.preventDefault();
@@ -84,16 +79,18 @@ const InnerComments = ({
         </div>
       ) : null}
 
-      {innerReply && (
-        <Form
-          username={username}
-          addInnerReplies={addInnerReplies}
-          feedbackId={feedbackId}
-          commentId={commentId}
-          setReply={setReply}
-          mobile={true}
-        />
-      )}
+      <AnimatePresence>
+        {innerReply && (
+          <Form
+            username={username}
+            addInnerReplies={addInnerReplies}
+            feedbackId={feedbackId}
+            commentId={commentId}
+            setReply={setReply}
+            mobile={true}
+          />
+        )}
+      </AnimatePresence>
     </StyledInnerComments>
   );
 };

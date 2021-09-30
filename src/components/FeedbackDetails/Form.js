@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Form = ({
   username,
@@ -18,6 +19,29 @@ const Form = ({
     setTextArea((text) => e.target.value);
   };
 
+  const formVariants = {
+    initial: {
+      height: 0,
+      opacity: 0,
+    },
+    animate: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+      },
+    },
+    exit: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+      },
+    },
+  };
+
   return (
     <FormContainer
       className={
@@ -26,6 +50,10 @@ const Form = ({
           : "feedback__content-bottom-reply"
       }
       mobile={mobile}
+      variants={formVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       <textarea
         name="replyComment"
@@ -57,7 +85,7 @@ const Form = ({
 
 export default Form;
 
-const FormContainer = styled.form`
+const FormContainer = styled(motion.form)`
   margin-top: 15px;
   margin-left: 70px;
   border: 1px solid transparent;

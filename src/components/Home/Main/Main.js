@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
 import MainMobileOverlay from "./MainMobileOverlay";
-import { motion } from "framer-motion";
 
 const Main = ({ showMobile }) => {
   const [showOptions, setShowOptions] = useState(false);

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 import { v4 as uuidv4 } from "uuid";
 import Form from "./Form";
+import {AnimatePresence} from 'framer-motion'
 
 const Comments = ({
   commentId,
@@ -102,16 +103,18 @@ const Comments = ({
 
       <p className="feedback__content">{content}</p>
 
-      {reply && (
-        <Form
-          username={username}
-          addInnerReplies={addInnerReplies}
-          feedbackId={feedbackId}
-          commentId={commentId}
-          setReply={setReply}
-          mobile={true}
-        />
-      )}
+      <AnimatePresence>
+        {reply && (
+          <Form
+            username={username}
+            addInnerReplies={addInnerReplies}
+            feedbackId={feedbackId}
+            commentId={commentId}
+            setReply={setReply}
+            mobile={true}
+          />
+        )}
+      </AnimatePresence>
 
       {name.trim() === "Zena Kelley" ? (
         <div className="feedback__content-delete">

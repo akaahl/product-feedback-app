@@ -126,7 +126,7 @@ const AddFeedback = () => {
     <StyledContainer
       initial={{ scale: 0 }}
       animate={{ scale: 1, transition: { type: "spring", duration: 1 } }}
-      exit={{ y: 400, opacity: 0 }}
+      exit={{ scale: 0, transition: { type: "spring", duration: 1 } }}
     >
       <nav>
         <button onClick={() => history.goBack()}>

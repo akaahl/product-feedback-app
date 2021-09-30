@@ -24,18 +24,25 @@ const Feedback = ({
     history.push(`/feedback/${id}`);
   };
 
-  const feedbackVariants = {
-    initial: { x: -100, opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "tween",
-        ease: "linear",
-        delay: index * 0.1,
-      },
-    },
-  };
+  const feedbackVariants = preventRedirect
+    ? {
+        initial: {
+          x: 0,
+          opacity: 1,
+        },
+      }
+    : {
+        initial: { x: -100, opacity: 0 },
+        animate: {
+          x: 0,
+          opacity: 1,
+          transition: {
+            type: "tween",
+            ease: "linear",
+            delay: index * 0.1,
+          },
+        },
+      };
   return (
     <FeedbackContainer
       onClick={preventRedirect ? null : showFeedback}
@@ -45,6 +52,8 @@ const Feedback = ({
       variants={feedbackVariants}
       initial="initial"
       animate="animate"
+      layoutId={`layout-${id}`}
+      whileHover={{ scale: feedbackId ? "none" : 1.02 }}
     >
       <UpvoteButton upvotes={upvotes} id={id} />
 
@@ -76,7 +85,8 @@ const FeedbackContainer = styled(motion.section)`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    transform: ${(props) => (!props.hover ? `scale(1.02)` : `none`)};
+    /* transform: ${(props) => (!props.hover ? `scale(1.02)` : `none`)}; */
+    transform: scale(1.02);
   }
 
   button {

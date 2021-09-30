@@ -9,6 +9,7 @@ import { totalComments } from "../utils/utilityFunctions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateData } from "../actions/dataActions";
+import { motion } from "framer-motion";
 
 const FeedbackDetails = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,28 @@ const FeedbackDetails = () => {
     history.push(`/edit-feedback/${feedbackId}`);
   };
 
+  const feedbackVariants = {
+    initial: {
+      x: -500,
+      opacity: 0,
+    },
+    animate: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: {
+      x: 500,
+      opacity: 0,
+    },
+  };
+
   return (
-    <StyledFeedback>
+    <StyledFeedback
+      variants={feedbackVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <nav className="feedback__nav">
         <button className="feedback__nav-back-btn" onClick={handleBackBtn}>
           <img src={arrowLeftIcon} alt="arrow left" />
@@ -92,7 +113,7 @@ const FeedbackDetails = () => {
 
 export default FeedbackDetails;
 
-const StyledFeedback = styled.main`
+const StyledFeedback = styled(motion.main)`
   margin: 70px 0;
   width: 800px;
 

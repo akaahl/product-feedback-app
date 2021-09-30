@@ -58,8 +58,6 @@ const Main = ({ status }) => {
           status === "planned" ? "main__planned active" : "main__planned"
         }
         variants={childrenVariants}
-        // initial="initial"
-        // animate="animate"
       >
         <div className="main__header">
           <p className="main__header_category">Planned ({planned?.length})</p>
