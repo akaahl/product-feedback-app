@@ -29,6 +29,7 @@ const StyledContainer = styled.div`
   overflow-y: hidden;
   background-color: rgba(0, 0, 0, 0.2);
   display: none;
+  z-index: 10;
 
   .main__overlay-container {
     background-color: #ffffff;

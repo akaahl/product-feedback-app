@@ -82,7 +82,7 @@ const MobileNavContainer = styled.nav`
   .nav__underline {
     position: absolute;
     bottom: -1px;
-    transition: left 0.2s ease-in, background-color 0.2s ease-in;
+    transition: left 0.2s linear, background-color 0.2s ease-in;
     left: ${({ status }) =>
       status === "planned" ? "0" : status === "in-progress" ? "34%" : "67%"};
     height: 2px;

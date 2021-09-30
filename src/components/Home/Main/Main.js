@@ -105,7 +105,7 @@ const Main = ({ showMobile }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer selectionsLength={selections.length}>
       <div className="main__header">
         <div className="main__header-suggestion">
           <img src={suggestionIcon} alt="suggestion" />
@@ -151,9 +151,9 @@ const Main = ({ showMobile }) => {
 
       {showMobile && <MainMobileOverlay />}
 
-      {selections.length > 0 && (
-        <div className="main__feedback-container">
-          {selections.map(
+      <div className="main__feedback-container">
+        {selections.length > 0 &&
+          selections.map(
             (
               { upvotes, title, id, description, comments, category },
               index
@@ -171,8 +171,7 @@ const Main = ({ showMobile }) => {
               />
             )
           )}
-        </div>
-      )}
+      </div>
     </MainContainer>
   );
 };
@@ -320,6 +319,11 @@ const MainContainer = styled.main`
       .main__header-sort {
         margin-left: 0;
       }
+    }
+
+    .main__feedback-container {
+      margin-bottom: ${({ selectionsLength }) =>
+        !selectionsLength ? "100vh" : "0"};
     }
   }
 
