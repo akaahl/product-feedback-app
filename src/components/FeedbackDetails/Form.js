@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Form = ({
   username,
@@ -42,6 +42,10 @@ const Form = ({
     },
   };
 
+  // const textAreaRef = useRef(null);
+
+  // useEffect(() => textAreaRef && textAreaRef.current.focus());
+
   return (
     <FormContainer
       className={
@@ -62,6 +66,7 @@ const Form = ({
         onChange={handleChange}
         onFocus={() => setFormFocus(true)}
         onBlur={() => setFormFocus(false)}
+        // ref={textAreaRef}
       ></textarea>
 
       <button

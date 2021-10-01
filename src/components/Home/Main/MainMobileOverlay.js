@@ -2,27 +2,65 @@ import React from "react";
 import styled from "styled-components";
 import HeaderCategories from "../Header/HeaderCategories";
 import HeaderRoadmap from "../Header/HeaderRoadmap";
+import { motion } from "framer-motion";
 
 const MainMobileOverlay = () => {
+  const containerVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        when: "beforeChildren",
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        when: "afterChildren",
+      },
+    },
+  };
+
+  const childVariants = {
+    initial: {
+      x: "100%",
+    },
+    animate: {
+      x: 0,
+    },
+    exit: {
+      x: "100%",
+    },
+  };
   return (
-    <StyledContainer>
-      <div
+    <StyledContainer
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <motion.div
         className="main__overlay-container"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
         }}
+        variants={childVariants}
       >
         <HeaderCategories />
         <HeaderRoadmap />
-      </div>
+      </motion.div>
     </StyledContainer>
   );
 };
 
 export default MainMobileOverlay;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   position: absolute;
   width: 100%;
   height: 100%;

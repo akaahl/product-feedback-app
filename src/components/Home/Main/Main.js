@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
 import MainMobileOverlay from "./MainMobileOverlay";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Main = ({ showMobile }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -104,6 +105,21 @@ const Main = ({ showMobile }) => {
     document.addEventListener("click", closeOptions);
   };
 
+  const showOptionsVariants = {
+    initial: {
+      scale: 0,
+      opacity: 0,
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+    },
+    exit: {
+      scale: 0,
+      opacity: 0,
+    },
+  };
+
   return (
     <MainContainer selectionsLength={selections.length}>
       <div className="main__header">
@@ -122,22 +138,31 @@ const Main = ({ showMobile }) => {
               alt="arrow"
               className={showOptions ? "active" : ""}
             />
-            {showOptions && (
-              <div className="selections-container" ref={selectionsRef}>
-                <p onClick={handleSelect} id="1">
-                  Most Upvotes {showArrowIcon("1")}
-                </p>
-                <p onClick={handleSelect} id="2">
-                  Least Upvotes {showArrowIcon("2")}
-                </p>
-                <p onClick={handleSelect} id="3">
-                  Most Comments {showArrowIcon("3")}
-                </p>
-                <p onClick={handleSelect} id="4">
-                  Least Comments {showArrowIcon("4")}
-                </p>
-              </div>
-            )}
+            <AnimatePresence>
+              {showOptions && (
+                <motion.div
+                  className="selections-container"
+                  ref={selectionsRef}
+                  variants={showOptionsVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <p onClick={handleSelect} id="1">
+                    Most Upvotes {showArrowIcon("1")}
+                  </p>
+                  <p onClick={handleSelect} id="2">
+                    Least Upvotes {showArrowIcon("2")}
+                  </p>
+                  <p onClick={handleSelect} id="3">
+                    Most Comments {showArrowIcon("3")}
+                  </p>
+                  <p onClick={handleSelect} id="4">
+                    Least Comments {showArrowIcon("4")}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
 
@@ -149,7 +174,7 @@ const Main = ({ showMobile }) => {
         </button>
       </div>
 
-      {showMobile && <MainMobileOverlay />}
+      <AnimatePresence>{showMobile && <MainMobileOverlay />}</AnimatePresence>
 
       <div className="main__feedback-container">
         {selections.length > 0 &&
@@ -232,7 +257,7 @@ const MainContainer = styled.main`
           height: 8px;
           margin-left: 5px;
           margin-bottom: 1px;
-          transition: 0.3s ease-in-out;
+          transition: 0.1s ease-in-out;
 
           &.active {
             transform: rotate(180deg);
