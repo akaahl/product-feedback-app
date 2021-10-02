@@ -4,4 +4,4 @@ This is my solution to the [Product Feedback App challenge on Frontend Mentor](h
 
 ## Screenshot
 
-![Home page](./assets/screenshots/home-ss.png)
+![Home page](./src/assets/screenshots/home-ss.png)
