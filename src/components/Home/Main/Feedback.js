@@ -85,7 +85,6 @@ const FeedbackContainer = styled(motion.section)`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    /* transform: ${(props) => (!props.hover ? `scale(1.02)` : `none`)}; */
     transform: scale(1.02);
   }
 

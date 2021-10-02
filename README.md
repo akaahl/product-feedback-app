@@ -1,10 +1,10 @@
 # Frontend Mentor - Product Feedback App solution
 
-This is my solution to the [Product Feedback App challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+This is my solution to the [Product Feedback App challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). This app allows user to display feedbacks, show feedback details and add comments, add new feedbacks, and edit them. It is a complete CRUD application, with added functionality such as filtering feedbacks based on status and category. User is also able to go to other pages, that is handled with dynamic routing, and see that all the data are in sync with the rest of the pages. In the Feedback Details page, user with acessibility issue may use the keyboard (tab button) to guide and add a comment/reply to the feedback itself. This app uses Web Local Storage to store data and keep them in-sync.
 
 ## Screenshot
 
-![Home page](./src/assets/screenshots/home-ss.png)
+![Home page](./src/assets/screenshots/demo.webm)
 
 ## Demo Link
 
@@ -211,3 +211,49 @@ const handleSubmit = (e) => {
 ```
 
 I first created two state hooks to contain the error status and form data, and another two custom functions to set the error status; both on elements focus out and on submit. Custom messages will appear when user have not entered in any of the input fields, and the styling changes accordingly.
+
+#### Custom props with Styled Components
+
+Another thing that I've learned is using props with Styled Components to render styling conditionally. I encountered a situation whereby I wanted to implement cursor styling to be "pointer" in the Home page, but render it as "default" in the FeedbackDetails page. My initial go-to solution would be adapting the CSS class names. But I wanted to get my hands dirty with custom props in SC, so I opted for the following solution:-
+
+```
+<FeedbackContainer hover={feedbackId}>
+    ...........
+</FeedbackContainer>
+
+
+
+const FeedbackContainer = styled(motion.section)`
+    cusor: ${props => !props.hover ? 'cursor' : 'default'}
+    .............
+`
+```
+
+The code snippets above shows how I am using feedbackId (generated with useParams) as a prop, to indicate that user is now in FeedbackDetails page. Meanwhile, in the styling section, it can be seen that I am implementing the "props.hover" to determine which styling should be loaded. And in this case, it would be default styling. SC uses ternary operator to conditionally render the desired effect, and that makes it easy for a lot of use cases, instead of just depending on CSS class names to render styling effect.
+
+### Continued development
+
+I do have some plans in the future to turn this app into a full-stack app, by adding user registration and authentication, data storage and whatnot. I might also take into consideration of adding new features such as a live chat functionality. But for now, the current app sufficiently stands as it is.
+
+### Useful resources
+
+- [Detect outside click in React](https://stackoverflow.com/questions/32553158/detect-click-outside-react-component) - This thread helped me to come up with the solution above (closing modal on outside). I simplified it a little bit for my use case. It's definitely a good read for those who want to more in-depth about it.
+
+- [React - Passing props with Styled Components](https://stackoverflow.com/questions/52321539/react-passing-props-with-styled-components) - This one helped how to use props in SC to render CSS style conditionally.
+
+- [Redux for Beginners](https://www.youtube.com/watch?v=CVpUuw9XSjY) - I ocassionally refer to this video by DevEd on how to setup redux, as I am more often than not, forgot how to do it due to the number of boilerplates. It's easy to understand and beginner friendly.
+
+- [Framer Motion Tutorials](https://www.youtube.com/playlist?list=PL4cUxeGkcC9iHDnQfTHEVVceOEBsOf07i) - Another great tutorials by NetNinja on how to use Framer Motion. It teaches how to setup FM, touched upon basic animations and variants, as well as page transitions. It's easy as it gets.
+
+## Author
+
+You may reach out to me on the following links:-
+
+- Frontend Mentor - [@akaahl](https://www.frontendmentor.io/profile/akaahl)
+- Twitter - [@akaahl1](https://twitter.com/akaahl1)
+
+Hope to connect with you all and chat! :D
+
+## Acknowledgments
+
+I would like to thank to FrontEnd Mentor for creating this beautiful, challenging yet enjoyable project. I had a lot of fun and stress creating this one, but I managed to push myself to solve every other problems that come in the way. For that, I am truly grateful for it. Also, I want to thank all the awesome tech communities, whether on Stack Overflow, Twitter or FEM platform, you guys are the kindest and most helpful out there. I hope to see some of you in real life
