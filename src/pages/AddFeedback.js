@@ -412,7 +412,6 @@ const StyledContainer = styled(motion.div)`
 
         span {
           font-size: 16px;
-          /* margin: 5px; */
           padding: 15px 20px;
           cursor: pointer;
           display: flex;

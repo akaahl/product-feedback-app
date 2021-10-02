@@ -27,9 +27,9 @@ const Home = () => {
 
     if (!data) {
       dispatch(fetchData());
+    } else {
+      dispatch(updateData(data));
     }
-
-    dispatch(updateData(data));
   }, [dispatch]);
 
   return (

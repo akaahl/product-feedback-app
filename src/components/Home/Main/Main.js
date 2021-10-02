@@ -51,9 +51,10 @@ const Main = ({ showMobile }) => {
       );
     }
   };
+  const feedbacks = useSelector((state) => state.data.productRequests);
 
   useEffect(() => {
-    const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
+    // const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
 
     const suggestions = feedbacks.filter(
       (feedback) => feedback.status === "suggestion"
@@ -72,11 +73,14 @@ const Main = ({ showMobile }) => {
       setSelections(suggestions);
       implementSort(buttonText);
     }
-  }, [dispatch, category, buttonText]);
+  }, [dispatch, category, buttonText, feedbacks]);
 
-  const suggestions = JSON.parse(
-    localStorage.getItem("data")
-  ).productRequests.filter((item) => item.status === "suggestion");
+  // const suggestions = JSON.parse(
+  //   localStorage.getItem("data")
+  // ).productRequests.filter((item) => item.status === "suggestion");
+  const suggestionsLength = feedbacks.filter(
+    (item) => item.status === "suggestion"
+  ).length;
 
   const handleSelect = (e) => {
     e.stopPropagation();
@@ -125,7 +129,7 @@ const Main = ({ showMobile }) => {
       <div className="main__header">
         <div className="main__header-suggestion">
           <img src={suggestionIcon} alt="suggestion" />
-          <p>{suggestions.length} Suggestions</p>
+          <p>{suggestionsLength} Suggestions</p>
         </div>
 
         <div className="main__header-sort">

@@ -26,7 +26,6 @@ const MobileNav = ({ status, setStatus }) => {
     setStatus((status) => buttonContent);
   };
 
-  // console.log(planned, inProgress, live);
   return (
     <MobileNavContainer status={status}>
       <button
@@ -93,7 +92,6 @@ const MobileNavContainer = styled.nav`
         ? "#ad1fea"
         : "#62bcfa"};
     width: 33%;
-    /* transform: translateX(-33%); */
   }
 
   @media (max-width: 768px) {

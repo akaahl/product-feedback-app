@@ -209,12 +209,10 @@ const StyledMain = styled(motion.main)`
     justify-content: space-between;
     padding-left: 20px;
     transition: none;
-    /* margin-bottom: 20px; */
 
     .main__planned,
     .main__in-progress,
     .main__live {
-      /* flex: 1; */
       width: 100vw;
       padding: 20px 0 0 20px;
     }
