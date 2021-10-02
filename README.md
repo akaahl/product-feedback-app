@@ -4,7 +4,7 @@ This is my solution to the [Product Feedback App challenge on Frontend Mentor](h
 
 ## Screenshot
 
-![Home page](./src/assets/screenshots/demo.webm)
+![Home page](./src/Demo.gif)
 
 ## Demo Link
 
