@@ -1,4 +1,4 @@
-const storagedata = JSON.parse(localStorage.getItem("data"));
+// const storagedata = JSON.parse(localStorage.getItem("data"));
 
 const initialState = {
   currentUser: {},
