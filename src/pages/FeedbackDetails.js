@@ -33,7 +33,7 @@ const FeedbackDetails = () => {
 
   const handleBackBtn = (e) => {
     e.preventDefault();
-    history.push("/");
+    history.goBack();
   };
 
   const handleEditFeedback = (e) => {

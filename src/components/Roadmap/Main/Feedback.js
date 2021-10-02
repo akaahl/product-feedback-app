@@ -26,7 +26,7 @@ const Feedback = ({
           ? "in-progress"
           : "live"
       }
-      onClick={() => history.push(`/edit-feedback/${id}`)}
+      onClick={() => history.push(`/feedback/${id}`)}
       roadmap={roadmap}
     >
       <div className="section__status">
