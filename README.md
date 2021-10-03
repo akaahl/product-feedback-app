@@ -4,7 +4,7 @@ This is my solution to the [Product Feedback App challenge on Frontend Mentor](h
 
 ## How It Works (GIF)
 
-![Home page](./src/demo.gif)
+![Home page](./src/Demo.gif)
 
 ## Demo Link
 
