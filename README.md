@@ -212,7 +212,7 @@ const handleSubmit = (e) => {
 
 I first created two state hooks to contain the error status and form data, and another two custom functions to set the error status; both on elements focus out and on submit. Custom messages will appear when user have not entered in any of the input fields, and the styling changes accordingly.
 
-#### Custom props with Styled Components
+#### Custom props with Styled Components:-
 
 Another thing that I've learned is using props with Styled Components to render styling conditionally. I encountered a situation whereby I wanted to implement cursor styling to be "pointer" in the Home page, but render it as "default" in the FeedbackDetails page. My initial go-to solution would be adapting the CSS class names. But I wanted to get my hands dirty with custom props in SC, so I opted for the following solution:-
 
