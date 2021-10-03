@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HeaderRoadmap = () => {
-  // const productRequests = JSON.parse(
-  //   localStorage.getItem("data")
-  // ).productRequests;
   const productRequests = useSelector((state) => state.data.productRequests);
 
   const plannedRequests = productRequests.filter(

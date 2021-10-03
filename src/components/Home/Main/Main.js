@@ -17,6 +17,10 @@ const Main = ({ showMobile }) => {
   const [buttonId, setButtonId] = useState("1");
   const [selections, setSelections] = useState([]);
   const dispatch = useDispatch();
+  const feedbacks = useSelector((state) => state.data.productRequests);
+  const suggestionsLength = feedbacks.filter(
+    (item) => item.status === "suggestion"
+  ).length;
   const category = useSelector((state) => state.data.category);
   const history = useHistory();
   const selectionsRef = useRef();
@@ -51,11 +55,8 @@ const Main = ({ showMobile }) => {
       );
     }
   };
-  const feedbacks = useSelector((state) => state.data.productRequests);
 
   useEffect(() => {
-    // const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
-
     const suggestions = feedbacks.filter(
       (feedback) => feedback.status === "suggestion"
     );
@@ -74,13 +75,6 @@ const Main = ({ showMobile }) => {
       implementSort(buttonText);
     }
   }, [dispatch, category, buttonText, feedbacks]);
-
-  // const suggestions = JSON.parse(
-  //   localStorage.getItem("data")
-  // ).productRequests.filter((item) => item.status === "suggestion");
-  const suggestionsLength = feedbacks.filter(
-    (item) => item.status === "suggestion"
-  ).length;
 
   const handleSelect = (e) => {
     e.stopPropagation();

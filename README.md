@@ -2,13 +2,13 @@
 
 This is my solution to the [Product Feedback App challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). This app allows user to display feedbacks, show feedback details and add comments, add new feedbacks, and edit them. It is a complete CRUD application, with added functionality such as filtering feedbacks based on status and category. User is also able to go to other pages, that is handled with dynamic routing, and see that all the data are in sync with the rest of the pages. In the Feedback Details page, user with acessibility issue may use the keyboard (tab button) to guide and add a comment/reply to the feedback itself. This app uses Web Local Storage to store data and keep them in-sync.
 
-## Screenshot
+## How It Works (GIF)
 
 ![Home page](./src/demo.gif)
 
 ## Demo Link
 
-- Live Site URL: [Vercel Live Site Demo]()
+- Live Site URL: [Vercel Live Site Demo](https://product-feedback-app-alpha.vercel.app/)
 
 ## Table of contents
 

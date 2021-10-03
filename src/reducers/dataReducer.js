@@ -1,8 +1,8 @@
-// const storagedata = JSON.parse(localStorage.getItem("data"));
+const storagedata = JSON.parse(localStorage.getItem("data"));
 
 const initialState = {
-  currentUser: {},
-  productRequests: [],
+  currentUser: storagedata?.currentUser || {},
+  productRequests: storagedata?.productRequests || [],
   category: "",
   buttonActive: 1,
 };
