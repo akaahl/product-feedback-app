@@ -8,7 +8,7 @@ This is my solution to the [Product Feedback App challenge on Frontend Mentor](h
 
 ## Demo Link
 
-- Live Site URL: [Vercel Live Site Demo](https://product-feedback-app-alpha.vercel.app/)
+- Live Site URL: [Product Feedback App Live Demo](https://product-feedback-app-alpha.vercel.app/)
 
 ## Table of contents
 
