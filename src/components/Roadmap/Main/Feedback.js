@@ -14,6 +14,7 @@ const Feedback = ({
   category,
   status,
   roadmap,
+  upvoted,
 }) => {
   const history = useHistory();
 
@@ -43,7 +44,7 @@ const Feedback = ({
       </div>
 
       <div className="section__upvotes-and-comments">
-        <UpvoteButton upvotes={upvotes} id={id} />
+        <UpvoteButton upvotes={upvotes} id={id} upvoted={upvoted} />
 
         <div
           className="section__upvotes-and-comments_comments"

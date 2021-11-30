@@ -31,13 +31,14 @@ const AddComment = ({ feedbackId }) => {
     const data = JSON.parse(localStorage.getItem("data"));
     data.productRequests.map((feedback) => {
       if (feedback.id === feedbackId) {
+        if (!feedback.comments) feedback.comments = [];
         const commentId = feedback.comments.length
           ? feedback.comments[feedback.comments.length - 1].id + 1
           : 0;
         const userComment = { id: commentId, content: comment, user };
         feedback.comments.push(userComment);
       }
-      return null;
+      return feedback;
     });
 
     localStorage.setItem("data", JSON.stringify(data));

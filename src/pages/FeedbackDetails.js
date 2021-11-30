@@ -29,7 +29,7 @@ const FeedbackDetails = () => {
   const data = useSelector((state) => state.data);
   const productRequests = data.productRequests;
   const feedback = productRequests.filter((item) => item.id === Number(id))[0];
-  const { title, category, upvotes, description, comments } = feedback;
+  const { title, category, upvotes, description, comments, upvoted } = feedback;
 
   const handleBackBtn = (e) => {
     e.preventDefault();
@@ -84,6 +84,7 @@ const FeedbackDetails = () => {
         preventRedirect={true}
         key={id}
         feedbackId={feedbackId}
+        upvoted={upvoted}
       />
 
       <section className="feedback__comments">

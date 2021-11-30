@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
 import { v4 as uuidv4 } from "uuid";
 import Form from "./Form";
-import {AnimatePresence} from 'framer-motion'
+import { AnimatePresence } from "framer-motion";
 
 const Comments = ({
   commentId,
@@ -18,13 +18,7 @@ const Comments = ({
   replies,
 }) => {
   const dispatch = useDispatch();
-  // const [textArea, setTextArea] = useState("");
   const [reply, setReply] = useState(false);
-  // const [formFocus, setFormFocus] = useState(false);
-
-  // const handleChange = (e) => {
-  //   setTextArea((text) => e.target.value);
-  // };
 
   const handleReply = (e) => {
     e.preventDefault();
@@ -44,8 +38,7 @@ const Comments = ({
 
         feedback.comments = updatedComments;
       }
-
-      return null;
+      return feedback;
     });
 
     localStorage.setItem("data", JSON.stringify(data));
@@ -73,8 +66,7 @@ const Comments = ({
           }
         });
       }
-
-      return null;
+      return feedback;
     });
 
     localStorage.setItem("data", JSON.stringify(data));
@@ -120,6 +112,7 @@ const Comments = ({
         <div className="feedback__content-delete">
           <button type="button" onClick={deleteComment}>
             <Icon icon="mdi:delete" className="delete-btn" />
+            Delete
           </button>
         </div>
       ) : null}

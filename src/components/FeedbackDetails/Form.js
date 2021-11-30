@@ -78,6 +78,7 @@ const Form = ({
           icon="mdi:send-circle-outline"
           className={textArea ? "reply-icon" : "reply-icon disabled"}
         />
+        Reply
       </button>
     </FormContainer>
   );

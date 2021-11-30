@@ -17,6 +17,7 @@ const Feedback = ({
   feedbackId,
   selectionsLength,
   index,
+  upvoted,
 }) => {
   const history = useHistory();
 
@@ -32,14 +33,12 @@ const Feedback = ({
         },
       }
     : {
-        initial: { x: -100, opacity: 0 },
+        initial: { opacity: 0 },
         animate: {
-          x: 0,
           opacity: 1,
           transition: {
-            type: "tween",
-            ease: "linear",
-            delay: index * 0.1,
+            type: "spring",
+            delay: index * 0.25,
           },
         },
       };
@@ -55,7 +54,7 @@ const Feedback = ({
       layoutId={`layout-${id}`}
       whileHover={{ scale: feedbackId ? "none" : 1.02 }}
     >
-      <UpvoteButton upvotes={upvotes} id={id} />
+      <UpvoteButton upvotes={upvotes} id={id} upvoted={upvoted} />
 
       <div className="feedback__content">
         <h3>{title}</h3>

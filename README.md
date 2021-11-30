@@ -50,7 +50,7 @@ Users should be able to:
 - [React Redux](https://react-redux.js.org/) - For global state management in React
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk) - To handle asynchronous logic interaction with redux store
 - [React Router Dom](https://www.npmjs.com/package/react-router-dom) - To handle routing (dynamic) in React
-- [Styled Components](https://styled-components.com/) - For styling and custom props hnadling
+- [Styled Components](https://styled-components.com/) - For styling and custom props handling
 - [Framer Motion](https://www.framer.com/motion/) - For micro interaction animations throughout the app
 
 ### What I learned
@@ -85,82 +85,38 @@ Initially, I figured that creating a function that set the modal close and attac
   };
 ```
 
-Right after, the mobile/modal is clicked open, the handleModal attaches a new event listener with a helper function; one that is intended to close the modal on any click onto the document itself. Thus, simplifies the whole modal closing process.
+Right after the mobile/modal is clicked open, the handleModal attaches a new event listener with a helper function; one that is intended to close the modal on any click onto the document itself. Thus, simplifies the whole modal closing process.
 
 #### Updating upvote button status and number:-
 
-This was my first time using localStorage, but implementing it in a practical app like this was fortunately a breeze. The one thing that I had trouble when trying to create the functionality to update the upvote status and number was dealing with nested objects. The data (provided in local JSON), has an array with nested objects within it. Hence I find confusing to update the upvote status for each individual feedback without mutating the original data. The solution that I came up with can be seen below:-
+This was my first time using localStorage, but implementing it in a practical app like this was fortunately a breeze. The one thing that I had trouble when trying to create the functionality to update the upvote status and number was dealing with nested objects. The data (provided in local JSON), has an array with nested objects within it. Hence I found it confusing to update the upvote status for each individual feedback without mutating the original data. The solution that I came up with can be seen below:-
 
 ```
 const handleClick = (e) => {
-    e.preventDefault();
+     e.preventDefault();
     e.stopPropagation();
 
-    if (!upvoteStatus) {
-      const updatedData = {
-        ...feedbacks,
-        productRequests: feedbacks.productRequests.map((feedback) => {
-          if (feedback.id === id) {
-            return {
+    const updatedData = {
+      ...data,
+      productRequests: data.productRequests.map((feedback) =>
+        feedback.id === id
+          ? {
               ...feedback,
-              upvotes: (feedback.upvotes += 1),
-              upvoted: true,
-            };
-          }
-          return { ...feedback };
-        }),
-      };
-      localStorage.setItem("data", JSON.stringify(updatedData));
-      dispatch(updateData(updatedData));
-      setUpvoteStatus(true);
-    }
+              upvotes: !upvoted
+                ? (feedback.upvotes += 1)
+                : (feedback.upvotes -= 1),
+              upvoted: !upvoted ? true : false,
+            }
+          : { ...feedback }
+      ),
+    };
 
-    if (upvoteStatus) {
-      const updatedData = {
-        ...feedbacks,
-        productRequests: feedbacks.productRequests.map((feedback) => {
-          if (feedback.id === id) {
-            delete feedback["upvoted"];
-            return {
-              ...feedback,
-              upvotes: (feedback.upvotes -= 1),
-            };
-          }
-          return { ...feedback };
-        }),
-      };
-      localStorage.setItem("data", JSON.stringify(updatedData));
-      dispatch(updateData(updatedData));
-      setUpvoteStatus(false);
-    }
+    localStorage.setItem("data", JSON.stringify(updatedData));
+    dispatch(updateData(updatedData));
   };
 ```
 
-First I created a handleClick function that checks whether user has upvoted or not. Within the function itself, I created a new variable to hold the new updated data whenever user clicks on the button (to upvote or to cancel upvote). I used the spread syntax, and mapped through the array, and updated the selected feedback. Then I updated both the localStorage and redux store, so as to sync the data throughout the app.
-
-```
-useEffect(() => {
-    setFeedbacks(data);
-
-    const extractedData = JSON.parse(localStorage.getItem("data"));
-
-    for (let i = 0; i < extractedData.productRequests.length; i++) {
-      // Load number of upvotes from localStorage
-      if (extractedData.productRequests[i].id === id) {
-        setNumberOfVotes(extractedData.productRequests[i].upvotes);
-      }
-      // Load upvote status
-      if (
-        extractedData.productRequests[i].id === id &&
-        extractedData.productRequests[i].upvoted === true
-      ) {
-        setUpvoteStatus(true);
-      }
-    }
-  }, [numberOfVotes, data, id, upvoteStatus]);
-```
-
-As for the useEffect, it checks whether user has upvoted when the component initially mounts, and updated the button styling accordingly.
+In the previous version of this code, the one that I wrote was quite verbose and repetitive. I took the liberty of my time to refactor them, and the end result is the above snippets. Which I think is much more simplified, optimized and readable. I only have to use ternary operator within "upvotes" and "upvoted" properties to render the value, instead of writing a lengthy "if else" statements. Futhermore, I don't have to implement useEffect as I did previously to check whether the user has already upvoted or not. This is automatically handled by redux in which "upvoted" is synced across all the components whereby the necessary styling will be adjusted according to its boolean value.
 
 #### Form error handling:-
 

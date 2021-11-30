@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Feedback from "./Feedback";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 const Main = ({ status }) => {
-  const [planned, setPlanned] = useState(null);
-  const [inProgress, setInProgress] = useState(null);
-  const [live, setLive] = useState(null);
-
-  useEffect(() => {
-    const feedbacks = JSON.parse(localStorage.getItem("data")).productRequests;
-
-    setPlanned(feedbacks.filter((feedback) => feedback.status === "planned"));
-    setInProgress(
-      feedbacks.filter((feedback) => feedback.status === "in-progress")
-    );
-    setLive(feedbacks.filter((feedback) => feedback.status === "live"));
-  }, []);
+  const planned = useSelector((state) => state.data.productRequests).filter(
+    (feedback) => feedback.status === "planned"
+  );
+  const inProgress = useSelector((state) => state.data.productRequests).filter(
+    (feedback) => feedback.status === "in-progress"
+  );
+  const live = useSelector((state) => state.data.productRequests).filter(
+    (feedback) => feedback.status === "live"
+  );
 
   const mainVariants = {
     initial: { opacity: 0 },
@@ -74,6 +71,7 @@ const Main = ({ status }) => {
               comments,
               category,
               status,
+              upvoted,
             }) => (
               <Feedback
                 upvotes={upvotes}
@@ -85,6 +83,7 @@ const Main = ({ status }) => {
                 key={id}
                 status={status}
                 roadmap={true}
+                upvoted={upvoted}
               />
             )
           )}
@@ -97,8 +96,6 @@ const Main = ({ status }) => {
             : "main__in-progress"
         }
         variants={childrenVariants}
-        // initial="initial"
-        // animate="animate"
       >
         <div className="main__header">
           <p className="main__header_category">
@@ -117,6 +114,7 @@ const Main = ({ status }) => {
               comments,
               category,
               status,
+              upvoted,
             }) => (
               <Feedback
                 upvotes={upvotes}
@@ -128,6 +126,7 @@ const Main = ({ status }) => {
                 key={id}
                 status={status}
                 roadmap={true}
+                upvoted={upvoted}
               />
             )
           )}
@@ -136,8 +135,6 @@ const Main = ({ status }) => {
       <motion.div
         className={status === "live" ? "main__live active" : "main__live"}
         variants={childrenVariants}
-        // initial="initial"
-        // animate="animate"
       >
         <div className="main__header">
           <p className="main__header_category">Live ({live?.length})</p>
@@ -154,6 +151,7 @@ const Main = ({ status }) => {
               comments,
               category,
               status,
+              upvoted,
             }) => (
               <Feedback
                 upvotes={upvotes}
@@ -165,6 +163,7 @@ const Main = ({ status }) => {
                 key={id}
                 status={status}
                 roadmap={true}
+                upvoted={upvoted}
               />
             )
           )}

@@ -3,7 +3,7 @@ const storagedata = JSON.parse(localStorage.getItem("data"));
 const initialState = {
   currentUser: storagedata?.currentUser || {},
   productRequests: storagedata?.productRequests || [],
-  category: "",
+  category: "all",
   buttonActive: 1,
 };
 

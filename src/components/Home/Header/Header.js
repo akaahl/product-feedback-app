@@ -9,7 +9,6 @@ import HeaderRoadmap from "./HeaderRoadmap";
 const Header = ({ showMobile, setShowMobile }) => {
   const closeMobileNav = (e) => {
     e.preventDefault();
-
     document.body.style.overflowY = "scroll";
     setShowMobile(false);
     document.removeEventListener("click", closeMobileNav);

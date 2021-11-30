@@ -1,90 +1,51 @@
 import styled from "styled-components";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import suggestionIcon from "../../../assets/suggestions/icon-suggestions.svg";
 import arrowIcon from "../../../assets/shared/icon-arrow.svg";
 import checkIcon from "../../../assets/shared/icon-check.svg";
 import plusIcon from "../../../assets/shared/icon-plus.svg";
 import Feedback from "./Feedback";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { totalComments } from "../../../utils/utilityFunctions";
 import { useHistory } from "react-router-dom";
 import MainMobileOverlay from "./MainMobileOverlay";
 import { motion, AnimatePresence } from "framer-motion";
+import EmptySuggestions from "./EmptySuggestions";
 
 const Main = ({ showMobile }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [buttonText, setButtonText] = useState("Most Upvotes");
   const [buttonId, setButtonId] = useState("1");
-  const [selections, setSelections] = useState([]);
-  const dispatch = useDispatch();
-  const feedbacks = useSelector((state) => state.data.productRequests);
+
+  const category = useSelector((state) => state.data.category);
+  const feedbacks = useSelector((state) => state.data.productRequests)
+    .filter((feedback) => feedback.status === "suggestion")
+    .filter((feedback) =>
+      category !== "all"
+        ? feedback.category.toLowerCase() === category.toLowerCase()
+        : feedback
+    )
+    .sort((a, b) =>
+      buttonText === "Most Upvotes"
+        ? b.upvotes - a.upvotes
+        : buttonText === "Least Upvotes"
+        ? a.upvotes - b.upvotes
+        : buttonText === "Most Comments"
+        ? totalComments(b.comments) - totalComments(a.comments)
+        : totalComments(a.comments) - totalComments(b.comments)
+    );
   const suggestionsLength = feedbacks.filter(
     (item) => item.status === "suggestion"
   ).length;
-  const category = useSelector((state) => state.data.category);
   const history = useHistory();
-  const selectionsRef = useRef();
-
-  // Function to implement user's selected sort option
-  const implementSort = (selectedSort) => {
-    if (selectedSort && selectedSort === "Most Upvotes") {
-      setSelections((prevSelection) =>
-        prevSelection.sort((a, b) => b.upvotes - a.upvotes)
-      );
-    }
-
-    if (selectedSort && selectedSort === "Least Upvotes") {
-      setSelections((prevSelection) =>
-        prevSelection.sort((a, b) => a.upvotes - b.upvotes)
-      );
-    }
-
-    if (selectedSort && selectedSort === "Most Comments") {
-      setSelections((prevSelection) =>
-        prevSelection.sort(
-          (a, b) => totalComments(b.comments) - totalComments(a.comments)
-        )
-      );
-    }
-
-    if (selectedSort && selectedSort === "Least Comments") {
-      setSelections((prevSelection) =>
-        prevSelection.sort(
-          (a, b) => totalComments(a.comments) - totalComments(b.comments)
-        )
-      );
-    }
-  };
-
-  useEffect(() => {
-    const suggestions = feedbacks.filter(
-      (feedback) => feedback.status === "suggestion"
-    );
-
-    if (category && category !== "all") {
-      setSelections(
-        suggestions.filter(
-          (suggestion) =>
-            suggestion.category.toLowerCase() === category.toLowerCase()
-        )
-      );
-
-      implementSort(buttonText);
-    } else {
-      setSelections(suggestions);
-      implementSort(buttonText);
-    }
-  }, [dispatch, category, buttonText, feedbacks]);
 
   const handleSelect = (e) => {
     e.stopPropagation();
 
     const selectedCategory = e.target.textContent.trim();
     const id = e.target.id;
-
     setButtonText(selectedCategory);
     setButtonId(id);
-    implementSort(selectedCategory);
   };
 
   const showArrowIcon = (id) => {
@@ -106,20 +67,17 @@ const Main = ({ showMobile }) => {
   const showOptionsVariants = {
     initial: {
       scale: 0,
-      opacity: 0,
     },
     animate: {
       scale: 1,
-      opacity: 1,
     },
     exit: {
       scale: 0,
-      opacity: 0,
     },
   };
 
   return (
-    <MainContainer selectionsLength={selections.length}>
+    <MainContainer selectionsLength={feedbacks.length}>
       <div className="main__header">
         <div className="main__header-suggestion">
           <img src={suggestionIcon} alt="suggestion" />
@@ -140,7 +98,6 @@ const Main = ({ showMobile }) => {
               {showOptions && (
                 <motion.div
                   className="selections-container"
-                  ref={selectionsRef}
                   variants={showOptionsVariants}
                   initial="initial"
                   animate="animate"
@@ -175,10 +132,10 @@ const Main = ({ showMobile }) => {
       <AnimatePresence>{showMobile && <MainMobileOverlay />}</AnimatePresence>
 
       <div className="main__feedback-container">
-        {selections.length > 0 &&
-          selections.map(
+        {feedbacks.length ? (
+          feedbacks.map(
             (
-              { upvotes, title, id, description, comments, category },
+              { upvotes, title, id, description, comments, category, upvoted },
               index
             ) => (
               <Feedback
@@ -188,12 +145,16 @@ const Main = ({ showMobile }) => {
                 description={description}
                 comments={comments}
                 category={category}
-                key={id}
-                selectionsLength={selections.length}
+                key={index}
+                selectionsLength={feedbacks.length}
                 index={index}
+                upvoted={upvoted}
               />
             )
-          )}
+          )
+        ) : (
+          <EmptySuggestions category={category} />
+        )}
       </div>
     </MainContainer>
   );
