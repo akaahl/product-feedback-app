@@ -75,7 +75,6 @@ const InnerComments = ({
         <div className="feedback__content-delete">
           <button onClick={deleteInnerReply}>
             <Icon icon="mdi:delete" className="delete-btn" />
-            Delete
           </button>
         </div>
       ) : null}

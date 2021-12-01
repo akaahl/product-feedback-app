@@ -112,7 +112,6 @@ const Comments = ({
         <div className="feedback__content-delete">
           <button type="button" onClick={deleteComment}>
             <Icon icon="mdi:delete" className="delete-btn" />
-            Delete
           </button>
         </div>
       ) : null}
